@@ -1,0 +1,65 @@
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: "Hepta Slab", serif;
+  font-weight: 400;
+  scroll-behavior: smooth;
+  padding-inline: 1.5rem;
+}
+
+.return {
+  background-color: $return;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 10px;
+}
+
+section.firstPage {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  h1 {
+    margin-top: 7vh;
+  }
+  .logo {
+    height: 6rem;
+    width: 6rem;
+    align-self: center;
+    margin-bottom: 2rem;
+  }
+  form {
+    h5 {
+      margin: 0;
+      text-align: left;
+    }
+    input {
+      width: 100%;
+      height: 2.5rem;
+      margin-bottom: 1rem;
+      background-color: #ffffffdb;
+      border: 1px solid $border;
+      border-radius: 5px;
+      padding-left: 5px;
+      transition: all 0.2s;
+    }
+    input:focus-visible {
+      outline: 0;
+      transform: scale(1.05);
+    }
+    input.error {
+      border: 4px solid $return;
+    }
+    margin-bottom: 1rem;
+  }
+
+  .primaryBtnContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}

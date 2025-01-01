@@ -1,31 +1,51 @@
+import { Button } from "../components/generic/Button";
+import { Headline } from "../components/singular/Headline";
+import { useNavigate } from "react-router-dom";
+
 export const Login = () => {
+  const navigate = useNavigate();
+  const BASE_URL = "/TheStitchMarkerAssistant";
+
+  const handleToLoginForm = () => {
+    setTimeout(() => {
+      navigate(BASE_URL + "/login");
+    }, 300);
+  };
+
+  const handleToNewUserForm = () => {
+    setTimeout(() => {
+      navigate(BASE_URL + "/newUser");
+    }, 300);
+  };
+
+  const handleThemeChange = () => {
+    const body = document.querySelector("#body");
+    if (body?.classList.value == "light") {
+      body.classList.remove("light");
+      body.classList.add("dark");
+    } else {
+      body?.classList.remove("dark");
+      body?.classList.add("light");
+    }
+  };
+
   return (
     <>
-      <h2>Welcome to The Stitch Marker Assistant</h2>
-      <h3>Create new user</h3>
-      <form>
-        <input type="text" name="username" id="username" placeholder="Name" />
-        <input type="email" name="email" id="email" placeholder="Email" />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-        />
-        <input type="submit" value="submit" />
-      </form>
-      <p>OR</p>
-      <h3>Log in</h3>
-      <form>
-        <input type="email" name="email" id="email" placeholder="Email" />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-        />
-        <input type="submit" value="submit" />
-      </form>
+      <section className="firstPage">
+        <Headline />
+        <div className="primaryBtnContainer">
+          <Button className="primary" onClick={handleToLoginForm}>
+            <>Log In</>
+          </Button>
+          <Button className="secondary" onClick={handleToNewUserForm}>
+            <>New User</>
+          </Button>
+          {/* REMOVE BELOW LATER */}
+          <button id="tempThemeChangeBtn" onClick={handleThemeChange}>
+            Theme
+          </button>
+        </div>
+      </section>
     </>
   );
 };

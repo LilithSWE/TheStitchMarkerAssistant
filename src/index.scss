@@ -1,0 +1,61 @@
+@import "./style/normalize";
+@import "./style/color";
+@import "./style/button";
+@import "./style/mobile";
+
+@media only screen and (max-width: 1024px) and (min-width: 641px) {
+  @import "./style/_tablet";
+}
+@media only screen and (min-width: 1025px) {
+  @import "./style/_desktop";
+}
+
+/* @media (prefers-color-scheme: light) { */
+body.light {
+  color: black;
+  background-color: $bodyBg;
+  .primary {
+    color: black;
+    background-color: $primary;
+  }
+  .secondary {
+    color: black;
+    background-color: $secondary;
+  }
+  .tetriary {
+    color: black;
+    background-color: $tetriary;
+  }
+  input {
+    background-color: $inputBg;
+  }
+}
+
+body.dark {
+  color: #fffdef;
+  background-color: $darkBodyBg;
+  .primary {
+    color: black;
+    background-color: $darkPrimary;
+  }
+  .secondary {
+    color: black;
+    background-color: $darkSecondary;
+  }
+  .tetriary {
+    color: black;
+    background-color: $darkTetriary;
+  }
+  input {
+    background-color: $darkInputBg;
+  }
+}
+
+/* REMOVE LATER */
+#tempThemeChangeBtn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: black;
+  color: white;
+}
