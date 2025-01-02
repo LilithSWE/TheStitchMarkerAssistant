@@ -2,10 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./pages/Layout";
 import { NotFound } from "./pages/NotFound";
 import { Home } from "./pages/Home";
-import { Loginform } from "./components/singular/LoginForm";
-import { NewUserForm } from "./components/singular/NewUserForm";
+import { Loginform } from "./pages/LoginForm";
+import { NewUserForm } from "./pages/NewUserForm";
 
-const BASE_URL = "/TheStitchMarkerAssistant";
+const BASE_URL = "/TheStitchMarkerAssistant/";
 
 export const router = createBrowserRouter([
   {

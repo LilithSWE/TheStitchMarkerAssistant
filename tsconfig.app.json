@@ -22,5 +22,11 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/Router.tsx", "src/main.tsx", "src/App.tsx"]
+  "include": [
+    "src",
+    "src/Router.tsx",
+    "src/main.tsx",
+    "src/App.tsx",
+    "vite-env.d.ts"
+  ]
 }

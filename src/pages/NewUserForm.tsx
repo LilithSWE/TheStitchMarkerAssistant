@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
-import { Button } from "../generic/Button";
-import { Headline } from "./Headline";
+import { Button } from "../components/generic/Button";
+import { Headline } from "../components/singular/Headline";
 import { useNavigate } from "react-router-dom";
 
 type NewUser = {
@@ -31,15 +31,22 @@ export const NewUserForm = () => {
       );
   };
 
+  const validatePassword = (password: string) => {
+    if (password.length > 5) {
+      return true;
+    }
+    return false;
+  };
+
   const errorMessage = (
     name: string,
     emailIsValid: RegExpMatchArray | null,
-    password: string
+    passwordIsValid: boolean
   ) => {
     const errorContainer = document.getElementById("errorMsg");
 
     if (errorContainer) {
-      if (name != "" && emailIsValid && password != "") {
+      if (name != "" && emailIsValid && passwordIsValid) {
         /* REGISTER USER IN THE DATABASE */
         return;
       } else {
@@ -55,7 +62,7 @@ export const NewUserForm = () => {
         const input = document.getElementById("regEmailInput");
         input?.classList.add("error");
       }
-      if (password == "") {
+      if (!passwordIsValid) {
         errorContainer.innerText += "Password";
         const input = document.getElementById("regPasswordInput");
         input?.classList.add("error");
@@ -66,7 +73,8 @@ export const NewUserForm = () => {
 
   const handleSubmit = () => {
     const emailIsValid = validateEmail(userInput.email);
-    errorMessage(userInput.name, emailIsValid, userInput.password);
+    const passwordIsValid = validatePassword(userInput.password);
+    errorMessage(userInput.name, emailIsValid, passwordIsValid);
   };
 
   const handleReturn = () => {
@@ -95,7 +103,7 @@ export const NewUserForm = () => {
           value={userInput.email}
           onChange={handleChange}
         />
-        <h5>Password</h5>
+        <h5>Password (minimum 6 char)</h5>
         <input
           type="password"
           name="password"

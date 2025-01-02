@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
-import { Button } from "../generic/Button";
-import { Headline } from "./Headline";
+import { Button } from "../components/generic/Button";
+import { Headline } from "../components/singular/Headline";
 import { useNavigate } from "react-router-dom";
 
 type User = {
