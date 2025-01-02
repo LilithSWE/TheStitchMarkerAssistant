@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from "react";
 import { Button } from "../components/generic/Button";
 import { Headline } from "../components/singular/Headline";
 import { useNavigate } from "react-router-dom";
+import { validateEmail } from "../helpers/validateEmail";
+import { validatePassword } from "../helpers/validatePassword";
 
 type NewUser = {
   name: string;
@@ -21,21 +23,6 @@ export const NewUserForm = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
     e.target.classList.remove("error");
-  };
-
-  const validateEmail = (email: string) => {
-    return email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
-  const validatePassword = (password: string) => {
-    if (password.length > 5) {
-      return true;
-    }
-    return false;
   };
 
   const errorMessage = (

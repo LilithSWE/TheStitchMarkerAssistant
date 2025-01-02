@@ -2,6 +2,9 @@ import { ChangeEvent, useState } from "react";
 import { Button } from "../components/generic/Button";
 import { Headline } from "../components/singular/Headline";
 import { useNavigate } from "react-router-dom";
+import supabaseClient from "../services/supabaseClient";
+import { validateEmail } from "../helpers/validateEmail";
+import { validatePassword } from "../helpers/validatePassword";
 
 type User = {
   email: string;
@@ -11,6 +14,7 @@ type User = {
 export const Loginform = () => {
   const navigate = useNavigate();
   const BASE_URL = "/TheStitchMarkerAssistant";
+  const errorContainer = document.getElementById("errorMsg");
   const [userInput, setUserInput] = useState<User>({ email: "", password: "" });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,22 +22,12 @@ export const Loginform = () => {
     e.target.classList.remove("error");
   };
 
-  const validateEmail = (email: string) => {
-    return email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
   const errorMessage = (
     emailIsValid: RegExpMatchArray | null,
-    password: string
+    passwordIsValid: boolean
   ) => {
-    const errorContainer = document.getElementById("errorMsg");
-
     if (errorContainer) {
-      if (emailIsValid && password != "") {
+      if (emailIsValid && passwordIsValid) {
         /* REGISTER USER IN THE DATABASE */
         return;
       } else {
@@ -44,7 +38,7 @@ export const Loginform = () => {
         const input = document.getElementById("loginEmailInput");
         input?.classList.add("error");
       }
-      if (password == "") {
+      if (!passwordIsValid) {
         errorContainer.innerText += "Password";
         const input = document.getElementById("loginPasswordInput");
         input?.classList.add("error");
@@ -53,9 +47,37 @@ export const Loginform = () => {
     }
   };
 
+  const signInUser = async (email: string, password: string) => {
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) {
+      console.error("Error signing in:", error.message);
+      return null;
+    }
+    return {
+      user: data.user,
+    };
+  };
+
   const handleSubmit = () => {
     const emailIsValid = validateEmail(userInput.email);
-    errorMessage(emailIsValid, userInput.password);
+    const passwordIsValid = validatePassword(userInput.password);
+    errorMessage(emailIsValid, passwordIsValid);
+    if (emailIsValid && passwordIsValid) {
+      signInUser(userInput.email, userInput.password).then((userInfo) => {
+        if (userInfo) {
+          localStorage.setItem("user_id", userInfo.user.id);
+          handleReturn();
+        } else {
+          console.log("Sign-in failed.");
+          if (errorContainer) {
+            errorContainer.innerText = "Wrong Email and/or Password!";
+          }
+        }
+      });
+    }
   };
 
   const handleReturn = () => {
