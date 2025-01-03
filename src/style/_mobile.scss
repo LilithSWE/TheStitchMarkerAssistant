@@ -27,7 +27,7 @@ main {
   gap: 10px;
 }
 
-section.firstPage {
+section.firstView {
   grid-column: span 2;
   display: flex;
   flex-direction: column;
@@ -65,11 +65,87 @@ section.firstPage {
     }
     margin-bottom: 1rem;
   }
+}
 
+section.secondView {
+  margin-top: 5rem;
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  h2 {
+    font-weight: 400;
+  }
   .primaryBtnContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    margin-top: 9rem;
+  }
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-inline: 10px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  h1 {
+    font-size: 1rem;
+  }
+  svg {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+div#nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 4rem;
+  display: flex;
+  justify-content: space-around;
+  padding-inline: 10px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  button.navBtn {
+    background-color: transparent;
+    height: auto;
+    width: auto;
+    div.navBtnText {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0px;
+
+      p {
+        align-self: center;
+        margin: 0;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.primaryBtnContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.btnText {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  p {
+    align-self: center;
+    margin: 0;
   }
 }
 
@@ -107,15 +183,5 @@ section.firstPage {
   }
   span {
     font-weight: 600;
-  }
-}
-
-.btnText {
-  display: flex;
-  gap: 5px;
-  justify-content: center;
-  p {
-    align-self: center;
-    margin: 0;
   }
 }

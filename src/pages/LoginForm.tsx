@@ -87,7 +87,7 @@ export const Loginform = () => {
   };
 
   return (
-    <section className="firstPage">
+    <section className="firstView">
       <Headline />
       <form>
         <h5>Email</h5>

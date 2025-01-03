@@ -26,7 +26,7 @@ export const Start = () => {
 
   return (
     <>
-      <section className="firstPage">
+      <section className="firstView">
         <Headline />
         <div className="primaryBtnContainer">
           <Button className="tetriary" onClick={handleToRowcounter}>

@@ -1,10 +1,6 @@
-interface IButtonProps {
-  children: JSX.Element;
-  onClick: () => void;
-  className: string;
-}
+import { ButtonProps } from "../../models/ButtonProps";
 
-export const Button = ({ children, onClick, className }: IButtonProps) => {
+export const Button = ({ children, onClick, className }: ButtonProps) => {
   return (
     <button className={className} onClick={onClick}>
       {children}

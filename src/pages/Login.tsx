@@ -20,7 +20,7 @@ export const Login = () => {
 
   return (
     <>
-      <section className="firstPage">
+      <section className="firstView">
         <Headline />
         <div className="primaryBtnContainer">
           <Button className="primary" onClick={handleToLoginForm}>

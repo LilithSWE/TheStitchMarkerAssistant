@@ -124,7 +124,7 @@ export const NewUserForm = () => {
       ) : (
         <></>
       )}
-      <section className="firstPage">
+      <section className="firstView">
         <Headline />
         <form>
           <h5>Name</h5>
