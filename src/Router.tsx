@@ -4,6 +4,11 @@ import { NotFound } from "./pages/NotFound";
 import { Home } from "./pages/Home";
 import { Loginform } from "./pages/LoginForm";
 import { NewUserForm } from "./pages/NewUserForm";
+import { Pattern } from "./pages/Pattern";
+import { PatternForm } from "./pages/PatternForm";
+import { Patterns } from "./pages/Patterns";
+import { RowCounter } from "./pages/RowCounter";
+import { Settings } from "./pages/Settings";
 
 const BASE_URL = "/TheStitchMarkerAssistant/";
 
@@ -18,35 +23,33 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: BASE_URL + "/login",
+        path: BASE_URL + "login",
         element: <Loginform />,
       },
       {
-        path: BASE_URL + "/newUser",
+        path: BASE_URL + "newUser",
         element: <NewUserForm />,
       },
-      /*
       {
-        path: "/TheStitchMarkerAssistant/patterns",
+        path: BASE_URL + "patterns",
         element: <Patterns />,
       },
       {
-        path: "/TheStitchMarkerAssistant/pattern:id" ,
+        path: BASE_URL + "pattern:id",
         element: <Pattern />,
       },
       {
-        path: "/TheStitchMarkerAssistant/patternform",
+        path: BASE_URL + "patternForm",
         element: <PatternForm />,
       },
       {
-        path: "/TheStitchMarkerAssistant/rowcounter",
+        path: BASE_URL + "rowcounter",
         element: <RowCounter />,
       },
       {
-        path: "/TheStitchMarkerAssistant/InstructionalVideos",
-        element: <InstructionalVideos />,
+        path: BASE_URL + "settings",
+        element: <Settings />,
       },
-      */
     ],
   },
 ]);

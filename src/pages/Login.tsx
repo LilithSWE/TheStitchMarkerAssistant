@@ -18,19 +18,6 @@ export const Login = () => {
     }, 300);
   };
 
-  const handleThemeChange = () => {
-    const body = document.querySelector("#body");
-    if (body?.classList.value == "light") {
-      body.classList.remove("light");
-      body.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      body?.classList.remove("dark");
-      body?.classList.add("light");
-      localStorage.setItem("theme", "light");
-    }
-  };
-
   return (
     <>
       <section className="firstPage">
@@ -42,10 +29,6 @@ export const Login = () => {
           <Button className="secondary" onClick={handleToNewUserForm}>
             <>New User</>
           </Button>
-          {/* REMOVE BELOW LATER */}
-          <button id="tempThemeChangeBtn" onClick={handleThemeChange}>
-            Theme
-          </button>
         </div>
       </section>
     </>

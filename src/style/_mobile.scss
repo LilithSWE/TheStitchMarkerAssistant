@@ -11,8 +11,13 @@
   background-color: $return;
 }
 
-.blur {
-  filter: blur(2px);
+.light {
+  background-color: $softWhite;
+}
+
+.dark {
+  color: $softWhite;
+  background-color: $darkBodyBg;
 }
 
 main {
@@ -68,6 +73,10 @@ section.firstPage {
   }
 }
 
+.blur {
+  filter: blur(2px);
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -98,5 +107,15 @@ section.firstPage {
   }
   span {
     font-weight: 600;
+  }
+}
+
+.btnText {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  p {
+    align-self: center;
+    margin: 0;
   }
 }
