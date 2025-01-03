@@ -4,9 +4,11 @@ import { Headline } from "../components/singular/Headline";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../helpers/validateEmail";
 import { validatePassword } from "../helpers/validatePassword";
+import supabaseClient from "../services/supabaseClient";
+import { PopuUp } from "../components/generic/PopUp";
 
 type NewUser = {
-  name: string;
+  username: string;
   email: string;
   password: string;
 };
@@ -14,11 +16,13 @@ type NewUser = {
 export const NewUserForm = () => {
   const navigate = useNavigate();
   const BASE_URL = "/TheStitchMarkerAssistant";
+  const errorContainer = document.getElementById("errorMsg");
   const [userInput, setUserInput] = useState<NewUser>({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
+  const [showPopUp, setShowPopUp] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
@@ -26,20 +30,18 @@ export const NewUserForm = () => {
   };
 
   const errorMessage = (
-    name: string,
+    username: string,
     emailIsValid: RegExpMatchArray | null,
     passwordIsValid: boolean
   ) => {
-    const errorContainer = document.getElementById("errorMsg");
-
     if (errorContainer) {
-      if (name != "" && emailIsValid && passwordIsValid) {
+      if (username != "" && emailIsValid && passwordIsValid) {
         /* REGISTER USER IN THE DATABASE */
         return;
       } else {
         errorContainer.innerText = "Please edit in the following fields: [";
       }
-      if (name == "") {
+      if (username == "") {
         errorContainer.innerText += "Name," + String.fromCharCode(160);
         const input = document.getElementById("regNameInput");
         input?.classList.add("error");
@@ -61,53 +63,105 @@ export const NewUserForm = () => {
   const handleSubmit = () => {
     const emailIsValid = validateEmail(userInput.email);
     const passwordIsValid = validatePassword(userInput.password);
-    errorMessage(userInput.name, emailIsValid, passwordIsValid);
+    errorMessage(userInput.username, emailIsValid, passwordIsValid);
+    if (userInput.username != "" && emailIsValid && passwordIsValid) {
+      registerNewUser(userInput.username, userInput.email, userInput.password);
+    }
+  };
+
+  const registerNewUser = async (
+    username: string,
+    email: string,
+    password: string
+  ) => {
+    const { data, error } = await supabaseClient.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          first_name: username,
+        },
+      },
+    });
+    if (error) {
+      console.error("Error signing in:", error.message);
+      if (errorContainer) {
+        errorContainer.innerText = error.message;
+      }
+    }
+    if (data.user?.id) {
+      setShowPopUp(true);
+    }
   };
 
   const handleReturn = () => {
     setTimeout(() => {
       navigate(BASE_URL);
     }, 300);
+    const section = document.querySelector("section");
+    section?.classList.remove("blur");
   };
 
   return (
-    <section className="firstPage">
-      <Headline />
-      <form>
-        <h5>Name</h5>
-        <input
-          type="text"
-          name="name"
-          id="regNameInput"
-          value={userInput.name}
-          onChange={handleChange}
-        />
-        <h5>Email</h5>
-        <input
-          type="email"
-          name="email"
-          id="regEmailInput"
-          value={userInput.email}
-          onChange={handleChange}
-        />
-        <h5>Password (minimum 6 char)</h5>
-        <input
-          type="password"
-          name="password"
-          id="regPasswordInput"
-          value={userInput.password}
-          onChange={handleChange}
-        />
-        <p id="errorMsg"></p>
-      </form>
-      <div className="primaryBtnContainer">
-        <Button className="secondary" onClick={handleSubmit}>
-          <>Register</>
-        </Button>
-        <Button className="return" onClick={handleReturn}>
-          <>Return</>
-        </Button>
-      </div>
-    </section>
+    <>
+      {showPopUp ? (
+        <PopuUp
+          message={
+            <>
+              <h3>You are now registered!</h3>
+              <p>
+                Before you can sign in, you will need to veriy your email by
+                clicking the:
+              </p>
+              <p>
+                <span>"Confirm your mail"</span>
+              </p>
+              <p>link in the email we sent from Supabase Auth!</p>
+            </>
+          }
+          onClose={handleReturn}
+        ></PopuUp>
+      ) : (
+        <></>
+      )}
+      <section className="firstPage">
+        <Headline />
+        <form>
+          <h5>Name</h5>
+          <input
+            type="text"
+            name="username"
+            id="regNameInput"
+            value={userInput.username}
+            onChange={handleChange}
+          />
+          <h5>Email</h5>
+          <input
+            type="email"
+            name="email"
+            id="regEmailInput"
+            value={userInput.email}
+            onChange={handleChange}
+          />
+          <h5>Password (minimum 6 char)</h5>
+          <input
+            type="password"
+            name="password"
+            id="regPasswordInput"
+            value={userInput.password}
+            onChange={handleChange}
+          />
+          <p id="errorMsg"></p>
+        </form>
+        <div className="primaryBtnContainer">
+          <Button className="secondary" onClick={handleSubmit}>
+            <>Register</>
+          </Button>
+          <Button className="return" onClick={handleReturn}>
+            <>Return</>
+          </Button>
+        </div>
+      </section>
+    </>
   );
 };

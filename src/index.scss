@@ -29,6 +29,10 @@ body.light {
   input {
     background-color: $inputBg;
   }
+  .popup {
+    background-color: $bodyBg;
+    border: 3px solid black;
+  }
 }
 
 body.dark {
@@ -49,6 +53,10 @@ body.dark {
   input {
     background-color: $darkInputBg;
   }
+  .popup {
+    background-color: $darkBodyBg;
+    border: 3px solid #fffdef;
+  }
 }
 
 /* REMOVE LATER */
@@ -57,5 +65,5 @@ body.dark {
   bottom: 10px;
   right: 10px;
   background-color: black;
-  color: white;
+  color: #fffdef;
 }
