@@ -20,7 +20,7 @@ export const RowCounter = () => {
     },
   ]);
   const [rowContent, setRowContent] = useState(
-    "Please go to your patterns and pick a part to start counting!"
+    "Please go to your patterns and pick a piece to start counting!"
   );
   const [showPopUp, setShowPopUp] = useState(false);
   const navigate = useNavigate();
@@ -51,9 +51,6 @@ export const RowCounter = () => {
     const newCount = count + 1;
     if (newCount <= totalAmountOfRows || newCount === totalAmountOfRows) {
       setCount(newCount);
-      if (allRows[newCount - 1]) {
-        console.log(allRows[newCount - 1]);
-      }
       setRowContent(allRows[newCount - 1].instructions);
       localStorage.setItem("currentCount", JSON.stringify(newCount));
     } else if (newCount >= totalAmountOfRows) {
