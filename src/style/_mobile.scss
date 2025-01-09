@@ -43,6 +43,7 @@ section.firstView {
   display: flex;
   flex-direction: column;
   text-align: center;
+  align-items: center;
   h1 {
     margin-top: 7vh;
   }
@@ -86,10 +87,7 @@ section.secondView {
   align-items: center;
   h2 {
     font-weight: 400;
-  }
-  .primaryBtnContainer {
-    margin-top: 9rem;
-    width: 80%;
+    margin-block: 2rem;
   }
 }
 
@@ -146,7 +144,10 @@ div#nav {
 .primaryBtnContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1.5rem;
+  width: 80%;
+  margin-bottom: 1rem;
 }
 
 .btnText {
@@ -190,6 +191,36 @@ div#nav {
   span {
     font-weight: 600;
   }
+}
+
+.patternPreview {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  grid-template-rows: 5rem;
+  width: 80%;
+  height: 5rem;
+  margin-top: 1rem;
+  align-items: center;
+  background-color: $tetriary;
+  transition: all 0.2s;
+  h4 {
+    overflow: hidden;
+  }
+  img {
+    height: 5rem;
+    width: 5rem;
+    object-fit: cover; /* Do not scale the image */
+    object-position: center;
+    border-right: 4px solid black;
+  }
+}
+.patternPreview:hover {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  transform: scale(1.03);
+}
+.patternPreview:active {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  transform: scale(0.97);
 }
 
 .rowCounterHeadlineContainer {

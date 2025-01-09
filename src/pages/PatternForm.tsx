@@ -1,3 +1,3 @@
 export const PatternForm = () => {
-  return <>Single pattern</>;
+  return <>Patterns Form!</>;
 };

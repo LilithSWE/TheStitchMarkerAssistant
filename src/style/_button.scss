@@ -3,8 +3,10 @@ button {
   border-radius: 5px;
   height: 2.5rem;
   width: auto;
-  font-size: auto;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s;
 }
 
