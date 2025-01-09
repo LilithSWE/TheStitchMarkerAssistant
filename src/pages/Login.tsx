@@ -23,10 +23,10 @@ export const Login = () => {
       <section className="firstView">
         <Headline />
         <div className="primaryBtnContainer">
-          <Button className="primary" onClick={handleToLoginForm}>
+          <Button bgColor="primary" onClick={handleToLoginForm}>
             <>Log In</>
           </Button>
-          <Button className="secondary" onClick={handleToNewUserForm}>
+          <Button bgColor="secondary" onClick={handleToNewUserForm}>
             <>New User</>
           </Button>
         </div>

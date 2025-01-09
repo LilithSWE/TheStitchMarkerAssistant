@@ -7,7 +7,7 @@ import { HeaderSmall } from "../components/singular/HeaderSmall";
 
 export const Settings = () => {
   const navigate = useNavigate();
-  const BASE_URL = "/TheStitchMarkerAssistant";
+  const BASE_URL = "/TheStitchMarkerAssistant/";
   const [lightTheme, setLightTheme] = useState(true);
 
   const setChangThemeBtn = () => {
@@ -116,7 +116,7 @@ export const Settings = () => {
         <h2>Settings</h2>
         <div className="primaryBtnContainer">
           {lightTheme ? (
-            <Button className="dark" onClick={handleThemeChange}>
+            <Button bgColor="dark" onClick={handleThemeChange}>
               <div className="btnText">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +131,7 @@ export const Settings = () => {
               </div>
             </Button>
           ) : (
-            <Button className="light" onClick={handleThemeChange}>
+            <Button bgColor="light" onClick={handleThemeChange}>
               <div className="btnText">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +146,7 @@ export const Settings = () => {
               </div>
             </Button>
           )}
-          <Button className="return" onClick={handleLogOut}>
+          <Button bgColor="return" onClick={handleLogOut}>
             <div className="btnText">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

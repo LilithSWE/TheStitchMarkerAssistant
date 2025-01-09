@@ -109,10 +109,10 @@ export const Loginform = () => {
         <p id="errorMsg"></p>
       </form>
       <div className="primaryBtnContainer">
-        <Button className="primary" onClick={handleSubmit}>
+        <Button bgColor="primary" onClick={handleSubmit}>
           <>Log In</>
         </Button>
-        <Button className="return" onClick={handleReturn}>
+        <Button bgColor="return" onClick={handleReturn}>
           <>Return</>
         </Button>
       </div>

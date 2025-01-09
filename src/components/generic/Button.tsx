@@ -1,8 +1,8 @@
 import { ButtonProps } from "../../models/ButtonProps";
 
-export const Button = ({ children, onClick, className }: ButtonProps) => {
+export const Button = ({ children, onClick, bgColor }: ButtonProps) => {
   return (
-    <button className={className} onClick={onClick}>
+    <button className={bgColor} onClick={onClick}>
       {children}
     </button>
   );

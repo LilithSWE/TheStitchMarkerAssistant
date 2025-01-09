@@ -13,7 +13,7 @@ export const Patterns = () => {
   return (
     <>
       Patterns
-      <Button className="return" onClick={handleReturn}>
+      <Button bgColor="return" onClick={handleReturn}>
         <>Return</>
       </Button>
     </>

@@ -12,7 +12,7 @@ export const PopuUp = ({ message, onClose }: PopupProps) => {
     <div className="overlay">
       <div className="popup">
         <div>{message}</div>
-        <Button className="return" onClick={onClose}>
+        <Button bgColor="return" onClick={onClose}>
           <>Close</>
         </Button>
       </div>

@@ -154,10 +154,10 @@ export const NewUserForm = () => {
           <p id="errorMsg"></p>
         </form>
         <div className="primaryBtnContainer">
-          <Button className="secondary" onClick={handleSubmit}>
+          <Button bgColor="secondary" onClick={handleSubmit}>
             <>Register</>
           </Button>
-          <Button className="return" onClick={handleReturn}>
+          <Button bgColor="return" onClick={handleReturn}>
             <>Return</>
           </Button>
         </div>
