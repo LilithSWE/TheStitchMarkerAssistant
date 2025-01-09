@@ -235,7 +235,7 @@ div#nav {
 .rowContent {
   width: 80%;
   font-size: 1.3rem;
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -309,6 +309,16 @@ div#nav {
     }
   }
 
+  section.secondView {
+    h2 {
+      font-weight: 400;
+      margin-block: 1rem;
+    }
+    .primaryBtnContainer {
+      margin-top: 1.5rem;
+    }
+  }
+
   header {
     top: 0;
     left: 0;
@@ -328,12 +338,6 @@ div#nav {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 25px;
     border-left: 1px solid black;
-  }
-
-  section.secondView {
-    .primaryBtnContainer {
-      margin-top: 3rem;
-    }
   }
 
   .rowCounterHeadlineContainer {
