@@ -5,16 +5,13 @@ import { Nav } from "../components/generic/Nav";
 import { NavButtonProps } from "../models/NavButtonProps";
 import { useEffect, useState } from "react";
 import { PopuUp } from "../components/generic/PopUp";
-
-type CurrentRow = {
-  instructions: string;
-};
+import { SingleRowInstruction } from "../models/SingleRowInstruction";
 
 export const RowCounter = () => {
   const [count, setCount] = useState(0);
   const [patternAndPartName, setPatternAndPartName] =
     useState("Pattern Name: Part");
-  const [allRows, setAllRows] = useState<CurrentRow[]>([
+  const [allRows, setAllRows] = useState<SingleRowInstruction[]>([
     {
       instructions: "This is the rowcounter!",
     },
@@ -37,7 +34,7 @@ export const RowCounter = () => {
       setPatternAndPartName(piece);
     }
     if (rows) {
-      const parsedRows: CurrentRow[] = rows ? JSON.parse(rows) : [];
+      const parsedRows: SingleRowInstruction[] = rows ? JSON.parse(rows) : [];
       setAllRows(parsedRows);
       if (oldCount) {
         setRowContent(parsedRows[Number(oldCount) - 1].instructions);

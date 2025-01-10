@@ -80,6 +80,7 @@ section.firstView {
 
 section.secondView {
   margin-top: 5rem;
+  margin-bottom: 5rem;
   grid-column: span 2;
   display: flex;
   flex-direction: column;
@@ -88,6 +89,62 @@ section.secondView {
   h2 {
     font-weight: 400;
     margin-block: 2rem;
+  }
+}
+
+section.patternView {
+  overflow: auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    margin-block: 1rem;
+    height: 20rem;
+    width: 20rem;
+    object-fit: cover; /* Do not scale the image */
+    object-position: center;
+    border: 4px solid black;
+  }
+  h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  button {
+    width: 20rem;
+  }
+  article.patternNotes {
+    width: 90%;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-block: 1rem;
+  }
+  section.partPreview {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: 90%;
+    margin-block: 1rem;
+    article {
+      align-self: flex-start;
+    }
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      align-self: center;
+    }
+    img {
+      margin-block: 1rem;
+      height: 5rem;
+      width: 5rem;
+      object-fit: cover; /* Do not scale the image */
+      object-position: center;
+      border: 4px solid black;
+    }
   }
 }
 
@@ -141,13 +198,21 @@ div#nav {
   }
 }
 
+article {
+  text-align: start;
+}
+
 .primaryBtnContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 1.5rem;
   width: 80%;
   margin-bottom: 1rem;
+  button {
+    width: 100%;
+  }
 }
 
 .btnText {
@@ -316,6 +381,25 @@ div#nav {
     }
     .primaryBtnContainer {
       margin-top: 1.5rem;
+    }
+  }
+
+  section.patternView {
+    article.patternNotes {
+      width: 85%;
+    }
+    img {
+      height: 10rem;
+      width: 10rem;
+    }
+    button {
+      width: 25rem;
+    }
+    article.patternNotes {
+      margin-top: 2rem;
+    }
+    section.partPreview {
+      width: 85%;
     }
   }
 

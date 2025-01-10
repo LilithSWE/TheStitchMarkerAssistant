@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
         element: <Patterns />,
       },
       {
-        path: BASE_URL + "pattern:id",
+        path: BASE_URL + "pattern/:id",
         element: <Pattern />,
       },
       {

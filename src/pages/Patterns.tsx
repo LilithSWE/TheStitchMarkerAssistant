@@ -138,12 +138,7 @@ export const Patterns = () => {
           </Button>
         </div>
         {patterns.map((pattern) => (
-          <PatternPreview
-            key={pattern.pattern_id}
-            id={pattern.pattern_id}
-            headline={pattern.headline}
-            img={pattern.img}
-          />
+          <PatternPreview key={pattern.pattern_id} pattern={pattern} />
         ))}
       </section>
       <Nav bgColor="primary" buttons={navButtons} />
