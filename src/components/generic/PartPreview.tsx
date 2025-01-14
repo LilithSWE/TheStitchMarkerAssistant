@@ -47,7 +47,7 @@ export const PartPreview = ({ part }: SinglePartProps) => {
   return (
     <section className="partPreview" id={part.part_id}>
       <h3>{part.headline}</h3>
-      {part.img ? <img src={part.img} alt="" /> : <></>}
+      {part.img ? <img src={part.img} alt="image of part of pattern" /> : <></>}
       <Button bgColor="tetriary" onClick={handleStartRowcounter}>
         <div className="btnText">
           <svg
@@ -62,10 +62,14 @@ export const PartPreview = ({ part }: SinglePartProps) => {
           <p>Start Rowcounter</p>
         </div>
       </Button>
-      <article>
-        <h4>Notes</h4>
-        <p>{part.notes}</p>
-      </article>
+      {part.notes ? (
+        <article>
+          <h4>Notes</h4>
+          <p>{part.notes}</p>
+        </article>
+      ) : (
+        <></>
+      )}
       <article>
         <h4>Instructions</h4>
         {part.rows.map((row) => (

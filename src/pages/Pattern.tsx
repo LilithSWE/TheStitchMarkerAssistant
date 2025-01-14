@@ -129,7 +129,14 @@ export const Pattern = () => {
     <>
       <HeaderSmall bgColor="tetriary" />
       <section className="patternView">
-        {pattern.img ? <img src={pattern.img} alt="" /> : <></>}
+        {pattern.img ? (
+          <img
+            src={pattern.img.replace("./", "../")}
+            alt="main pattern image"
+          />
+        ) : (
+          <></>
+        )}
         <h2>{pattern.headline}</h2>
         <Button bgColor="secondary" onClick={handleEditPattern}>
           <div className="btnText">
@@ -145,10 +152,14 @@ export const Pattern = () => {
             <p>Edit Pattern</p>
           </div>
         </Button>
-        <article className="patternNotes">
-          <h4>Notes</h4>
-          <p>{pattern.notes}</p>
-        </article>
+        {pattern.notes ? (
+          <article className="patternNotes">
+            <h4>Notes</h4>
+            <p>{pattern.notes}</p>
+          </article>
+        ) : (
+          <></>
+        )}
         {parts.map((part) => (
           <PartPreview key={part.part_id} part={part} />
         ))}
