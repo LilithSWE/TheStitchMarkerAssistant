@@ -25,7 +25,8 @@ body.light {
     color: black;
     background-color: $tetriary;
   }
-  input {
+  input,
+  .count {
     background-color: $inputBg;
   }
   .popup {
@@ -55,7 +56,9 @@ body.dark {
     color: black;
     background-color: $darkTetriary;
   }
-  input {
+  input,
+  .count {
+    color: black;
     background-color: $darkInputBg;
   }
   .popup {

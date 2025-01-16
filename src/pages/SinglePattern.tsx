@@ -1,20 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import supabaseClient from "../services/supabaseClient";
-import { FetchedPart } from "../models/FetchedPart";
 import { PatternContext } from "../context/PatternContext";
 import { PartPreview } from "../components/generic/PartPreview";
 import { Button } from "../components/generic/Button";
 import { HeaderSmall } from "../components/singular/HeaderSmall";
 import { Nav } from "../components/generic/Nav";
 import { NavButtonProps } from "../models/NavButtonProps";
+import { PatternFormDispatchContext } from "../context/PatternFormDispatchContext";
+import { Part } from "../models/Part";
+import { Pattern } from "../models/Pattern";
+import { PopuUp } from "../components/generic/PopUp";
 
-export const Pattern = () => {
+export const SinglePattern = () => {
   const navigate = useNavigate();
   const BASE_URL = "/TheStitchMarkerAssistant/";
   const pattern = useContext(PatternContext);
-  const [parts, setParts] = useState<FetchedPart[]>([]);
+  const fromDispatch = useContext(PatternFormDispatchContext);
+  const [parts, setParts] = useState<Part[]>([]);
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [showWarningPopUp, setShowWarningPopUp] = useState(false);
   const { id } = useParams();
+  const user_id = localStorage.getItem("user_id");
 
   useEffect(() => {
     const getSinglePattern = async (user_id: string, pattern_id: string) => {
@@ -27,7 +34,7 @@ export const Pattern = () => {
         console.log(error);
       }
       if (data) {
-        const parsedData: FetchedPart[] = data.map((item) => ({
+        const parsedData: Part[] = data.map((item) => ({
           part_id: item.part_id,
           pattern_id: item.pattern_id,
           headline: item.headline,
@@ -40,7 +47,6 @@ export const Pattern = () => {
       }
     };
 
-    const user_id = localStorage.getItem("user_id");
     if (user_id && id) {
       getSinglePattern(user_id, id);
     }
@@ -48,11 +54,63 @@ export const Pattern = () => {
   }, []);
 
   const handleEditPattern = () => {
-    console.log("clicked Edit!");
+    const patternForm: Pattern = {
+      headline: pattern.headline,
+      notes: pattern.notes,
+      img: pattern.img,
+      pattern_id: pattern.pattern_id,
+      type: pattern.type,
+      parts: parts,
+    };
+
+    fromDispatch({ type: "UPDATE", payload: patternForm });
+    setTimeout(() => {
+      navigate(BASE_URL + "patternForm");
+    }, 300);
   };
 
   const handleDeletePattern = () => {
-    console.log("clicked Delete!");
+    const deleteFromDB = async (user_id: string, pattern_id: string) => {
+      const { data, error } = await supabaseClient
+        .from("Patterns")
+        .delete()
+        .eq("user_id", user_id)
+        .eq("pattern_id", pattern_id);
+      if (error) {
+        console.log(error);
+      }
+      if (data) {
+        console.log(data);
+      }
+    };
+    if (user_id && id) {
+      deleteFromDB(user_id, id);
+    }
+    setShowWarningPopUp(false);
+    setShowPopUp(true);
+  };
+
+  const handleAttemptedDelete = () => {
+    const section = document.querySelector("section");
+    section?.classList.add("blur");
+    setShowWarningPopUp(true);
+  };
+
+  const handleCloseWarningPopup = () => {
+    const section = document.querySelector("section");
+    section?.classList.remove("blur");
+    setTimeout(() => {
+      setShowWarningPopUp(false);
+    }, 300);
+  };
+
+  const handleClosePopUp = () => {
+    const section = document.querySelector("section");
+    section?.classList.remove("blur");
+    setTimeout(() => {
+      setShowPopUp(false);
+    }, 300);
+    handleToPatterns();
   };
 
   const handleToPatterns = () => {
@@ -127,6 +185,35 @@ export const Pattern = () => {
 
   return (
     <>
+      {showWarningPopUp ? (
+        <div className="overlay">
+          <div className="popup">
+            <div>
+              <p>
+                <span>Are you sure you wish to delete this pattern?</span>
+              </p>
+            </div>
+            <div className="primaryBtnContainer">
+              <Button bgColor="return" onClick={handleDeletePattern}>
+                <>Yes, delete it.</>
+              </Button>
+              <Button bgColor="primary" onClick={handleCloseWarningPopup}>
+                <>No, I changed my mind.</>
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      {showPopUp ? (
+        <PopuUp
+          message={<h3>You have successfully deleted the pattern!</h3>}
+          onClose={handleClosePopUp}
+        ></PopuUp>
+      ) : (
+        <></>
+      )}
       <HeaderSmall bgColor="tetriary" />
       <section className="patternView">
         {pattern.img ? (
@@ -178,7 +265,7 @@ export const Pattern = () => {
               <p>Edit Pattern</p>
             </div>
           </Button>
-          <Button bgColor="return" onClick={handleDeletePattern}>
+          <Button bgColor="return" onClick={handleAttemptedDelete}>
             <div className="btnText">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

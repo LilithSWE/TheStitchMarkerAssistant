@@ -2,16 +2,18 @@ import { useNavigate } from "react-router-dom";
 import { Nav } from "../components/generic/Nav";
 import { HeaderSmall } from "../components/singular/HeaderSmall";
 import { NavButtonProps } from "../models/NavButtonProps";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FetchedPattern } from "../models/FetchedPattern";
 import supabaseClient from "../services/supabaseClient";
 import { PatternPreview } from "../components/generic/PatternPreview";
 import { Button } from "../components/generic/Button";
+import { PatternFormDispatchContext } from "../context/PatternFormDispatchContext";
 
 export const Patterns = () => {
   const [patterns, setPatterns] = useState<FetchedPattern[]>([]);
   const navigate = useNavigate();
   const BASE_URL = "/TheStitchMarkerAssistant/";
+  const fromDispatch = useContext(PatternFormDispatchContext);
 
   useEffect(() => {
     const getAllPatterns = async (user_id: string) => {
@@ -43,6 +45,12 @@ export const Patterns = () => {
   }, []);
 
   const handleNewPattern = () => {
+    fromDispatch({
+      type: "CLEAR",
+      payload: {
+        parts: [],
+      },
+    });
     setTimeout(() => {
       navigate(BASE_URL + "patternForm");
     }, 300);

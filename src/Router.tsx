@@ -4,7 +4,7 @@ import { NotFound } from "./pages/NotFound";
 import { Home } from "./pages/Home";
 import { Loginform } from "./pages/LoginForm";
 import { NewUserForm } from "./pages/NewUserForm";
-import { Pattern } from "./pages/Pattern";
+import { SinglePattern } from "./pages/SinglePattern";
 import { PatternForm } from "./pages/PatternForm";
 import { Patterns } from "./pages/Patterns";
 import { RowCounter } from "./pages/RowCounter";
@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
       },
       {
         path: BASE_URL + "pattern/:id",
-        element: <Pattern />,
+        element: <SinglePattern />,
       },
       {
         path: BASE_URL + "patternForm",

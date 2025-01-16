@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { FetchedPart } from "../../models/FetchedPart";
 import { Button } from "./Button";
 import { useContext } from "react";
 import { PatternContext } from "../../context/PatternContext";
 import { Row } from "../../models/Row";
 import { SingleRowInstruction } from "../../models/SingleRowInstruction";
+import { Part } from "../../models/Part";
 
 type SinglePartProps = {
-  part: FetchedPart;
+  part: Part;
 };
 
 export const PartPreview = ({ part }: SinglePartProps) => {
@@ -20,12 +20,16 @@ export const PartPreview = ({ part }: SinglePartProps) => {
     const newRowArray: SingleRowInstruction[] = [];
 
     rows.forEach((row) => {
-      if (row.amount_of_rows === 1) {
-        newRowArray.push({ instructions: row.instructions });
-      } else {
-        for (let i = 0; i < row.amount_of_rows; i++) {
+      if (row.instructions) {
+        if (row.amount_of_rows === 1) {
           newRowArray.push({ instructions: row.instructions });
+        } else {
+          for (let i = 0; i < row.amount_of_rows; i++) {
+            newRowArray.push({ instructions: row.instructions });
+          }
         }
+      } else {
+        newRowArray.push({ instructions: "Instructions missing..." });
       }
     });
 
@@ -45,9 +49,9 @@ export const PartPreview = ({ part }: SinglePartProps) => {
   };
 
   return (
-    <section className="partPreview" id={part.part_id}>
+    <section className="partPreview">
       <h3>{part.headline}</h3>
-      {part.img ? <img src={part.img} alt="image of part of pattern" /> : <></>}
+      {part.img ? <img src={part.img} alt="part of pattern" /> : <></>}
       <Button bgColor="tetriary" onClick={handleStartRowcounter}>
         <div className="btnText">
           <svg
@@ -73,9 +77,10 @@ export const PartPreview = ({ part }: SinglePartProps) => {
       <article>
         <h4>Instructions</h4>
         {part.rows.map((row) => (
-          <p>
-            {row.row_start}. {row.instructions}
-          </p>
+          <div className="rowInstructionContainer" key={row.row_start}>
+            <p>{row.row_start}.</p>
+            <p>{row.instructions}</p>
+          </div>
         ))}
       </article>
     </section>

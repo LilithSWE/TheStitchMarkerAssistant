@@ -1,10 +1,12 @@
 import { Part } from "./Part";
 
 export type Pattern = {
-  user_id: string;
+  created_at?: string;
   headline: string;
+  notes?: string;
   img: string;
-  notes: string;
-  type: string;
+  pattern_id?: string;
+  type?: string;
+  user_id?: string;
   parts: Part[];
 };
