@@ -48,6 +48,10 @@ export const Patterns = () => {
     fromDispatch({
       type: "CLEAR",
       payload: {
+        headline: "",
+        img: "./images/404.png",
+        notes: "",
+        type: "knitting",
         parts: [],
       },
     });

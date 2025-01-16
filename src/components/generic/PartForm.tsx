@@ -20,7 +20,7 @@ export const PartForm = ({ part }: Props) => {
     const updatedPattern: Pattern = {
       ...pattern,
       parts: pattern.parts.map((oldPart) =>
-        oldPart.part_id !== part.part_id
+        oldPart.part_id === part.part_id
           ? {
               ...oldPart,
               [name]: value,

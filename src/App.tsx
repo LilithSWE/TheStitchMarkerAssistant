@@ -20,13 +20,14 @@ export function App() {
   });
 
   const [patternForm, formDispatch] = useReducer(PatternFormReducer, {
-    headline: "Pattern headline",
-    img: "",
+    headline: "",
+    img: "./images/404.png",
     notes: "",
-    type: "",
+    type: "knitting",
     parts: [
       {
-        headline: "Part headline",
+        part_id: 1,
+        headline: "",
         rows: [
           {
             row_start: 1,

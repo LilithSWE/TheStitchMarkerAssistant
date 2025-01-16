@@ -6,15 +6,20 @@ import { PatternFormContext } from "../context/PatternFormContext";
 import { useNavigate } from "react-router-dom";
 import { PatternFormDispatchContext } from "../context/PatternFormDispatchContext";
 import { Pattern } from "../models/Pattern";
+import supabaseClient from "../services/supabaseClient";
+import { PopuUp } from "../components/generic/PopUp";
+import { FetchedPattern } from "../models/FetchedPattern";
+import { Part } from "../models/Part";
 
 export const PatternForm = () => {
   const navigate = useNavigate();
   const BASE_URL = "/TheStitchMarkerAssistant/";
   const pattern = useContext(PatternFormContext);
   const formDispatch = useContext(PatternFormDispatchContext);
-
+  const [showPopUp, setShowPopUp] = useState(false);
   const [patternType, setPatternType] = useState(pattern.type || "knitting");
   const nameOfImage = pattern.img?.replace("./images/", "");
+  const [message, setMessage] = useState("I have no more info..");
 
   const getRandomInt = () => {
     let inUse = true;
@@ -53,6 +58,14 @@ export const PatternForm = () => {
     }
   };
 
+  const handleClosePopup = () => {
+    const section = document.querySelector("section");
+    section?.classList.remove("blur");
+    setTimeout(() => {
+      setShowPopUp(false);
+    }, 300);
+  };
+
   const handleUploadImg = () => {
     console.log("clicked 'Upload Img'!");
   };
@@ -87,13 +100,118 @@ export const PatternForm = () => {
     });
   };
 
-  const handleSavePattern = () => {
-    console.log("Saved the pattern... or you will! ");
-    // For the API call to both Pattern and Parts DB!
+  const checkForm = () => {
+    const emptyRows = pattern.parts.some((part) =>
+      part.rows.some((row) => !row.instructions || row.instructions === "")
+    );
+
+    if (!pattern.headline || pattern.headline === "") {
+      setMessage("You need to give the pattern a name before you save it.");
+      setShowPopUp(true);
+      return false;
+    } else if (pattern.parts.length === 0) {
+      setMessage("Your pattern needs at least one part before you save it.");
+      setShowPopUp(true);
+      return false;
+    } else if (emptyRows) {
+      setMessage(
+        "You have rows without instructios in them. Please edit this before saving."
+      );
+      setShowPopUp(true);
+      return false;
+    }
+    return true;
+  };
+
+  const handleSavePattern = async () => {
+    const submitToPatternDB = async (user_id: string) => {
+      const { data, error } = await supabaseClient
+        .from("Patterns")
+        .insert([
+          {
+            user_id: user_id,
+            headline: pattern.headline,
+            img: pattern.img,
+            notes: pattern.notes,
+            type: pattern.type,
+          },
+        ])
+        .select();
+      if (error) {
+        console.log(error);
+      }
+      if (data) {
+        return data.map((item) => ({
+          created_at: item.created_at,
+          headline: item.headline,
+          img: item.img,
+          notes: item.notes,
+          pattern_id: item.pattern_id,
+          type: item.type,
+          user_id: item.user_id,
+        }));
+      }
+
+      return [];
+    };
+
+    const submitToPartsDB = async (response: FetchedPattern) => {
+      const submitSinglePart = async (part: Part) => {
+        const { data, error } = await supabaseClient.from("Parts").insert([
+          {
+            user_id: response.user_id,
+            pattern_id: response.pattern_id,
+            part_id: part.part_id,
+            headline: part.headline,
+            img: part.img,
+            notes: part.notes,
+            rows: part.rows,
+          },
+        ]);
+        if (error) {
+          console.log(error);
+        }
+        if (data) {
+          console.log(data);
+        }
+      };
+
+      pattern.parts.forEach((part) => {
+        submitSinglePart(part);
+      });
+    };
+
+    let correctForm = false;
+    correctForm = checkForm();
+
+    if (correctForm) {
+      const user_id = localStorage.getItem("user_id");
+      if (!user_id) {
+        console.log("User ID not found in localStorage");
+        return;
+      } else {
+        try {
+          const response = await submitToPatternDB(user_id);
+          if (response.length > 0) {
+            await submitToPartsDB(response[0]);
+          }
+        } catch (error) {
+          console.error("Error saving pattern and parts:", error);
+        }
+      }
+    }
   };
 
   return (
     <>
+      {showPopUp ? (
+        <PopuUp
+          message={<h3>{message}</h3>}
+          onClose={handleClosePopup}
+        ></PopuUp>
+      ) : (
+        <></>
+      )}
       <HeaderSmall bgColor="secondary" />
       <section className="secondView">
         <h2>New Pattern</h2>

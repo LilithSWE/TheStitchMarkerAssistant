@@ -16,6 +16,7 @@ export const PatternFormReducer = (
       type: "",
       parts: [
         {
+          part_id: 1,
           headline: "",
           rows: [
             {
