@@ -8,6 +8,7 @@ export const PatternFormContext = createContext<Pattern>({
   type: "",
   parts: [
     {
+      part_id: 0,
       headline: "",
       rows: [
         {

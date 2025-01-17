@@ -3,7 +3,7 @@ import { Button } from "../components/generic/Button";
 import { PartForm } from "../components/generic/PartForm";
 import { HeaderSmall } from "../components/singular/HeaderSmall";
 import { PatternFormContext } from "../context/PatternFormContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PatternFormDispatchContext } from "../context/PatternFormDispatchContext";
 import { Pattern } from "../models/Pattern";
 import supabaseClient from "../services/supabaseClient";
@@ -17,9 +17,11 @@ export const PatternForm = () => {
   const pattern = useContext(PatternFormContext);
   const formDispatch = useContext(PatternFormDispatchContext);
   const [showPopUp, setShowPopUp] = useState(false);
+  const [showCompletedSavePopup, setShowCompletedSavePopup] = useState(false);
   const [patternType, setPatternType] = useState(pattern.type || "knitting");
   const nameOfImage = pattern.img?.replace("./images/", "");
   const [message, setMessage] = useState("I have no more info..");
+  const { newPattern } = useParams();
 
   const getRandomInt = () => {
     let inUse = true;
@@ -66,12 +68,22 @@ export const PatternForm = () => {
     }, 300);
   };
 
+  const handleCloseCompletedSavePopup = () => {
+    const section = document.querySelector("section");
+    section?.classList.remove("blur");
+    setTimeout(() => {
+      navigate(BASE_URL + "patterns");
+      setShowCompletedSavePopup(false);
+    }, 300);
+  };
+
   const handleUploadImg = () => {
     console.log("clicked 'Upload Img'!");
   };
 
   const handleSwitchType = (type: string) => {
     setPatternType(type);
+    pattern.type = type;
   };
 
   const handleNewPart = () => {
@@ -120,11 +132,23 @@ export const PatternForm = () => {
       setShowPopUp(true);
       return false;
     }
+
+    // Change default image, if it is in use.
+    if (
+      pattern.img === "./images/knitting.png" ||
+      pattern.img === "./images/crochet.png"
+    ) {
+      if (pattern.type === "knitting") {
+        pattern.img = "./images/knitting.png";
+      } else if (pattern.type === "crochet") {
+        pattern.img = "./images/crochet.png";
+      }
+    }
     return true;
   };
 
   const handleSavePattern = async () => {
-    const submitToPatternDB = async (user_id: string) => {
+    const submitNewToPatternDB = async (user_id: string) => {
       const { data, error } = await supabaseClient
         .from("Patterns")
         .insert([
@@ -154,10 +178,9 @@ export const PatternForm = () => {
 
       return [];
     };
-
-    const submitToPartsDB = async (response: FetchedPattern) => {
+    const submitNewToPartsDB = async (response: FetchedPattern) => {
       const submitSinglePart = async (part: Part) => {
-        const { data, error } = await supabaseClient.from("Parts").insert([
+        const { data, error } = await supabaseClient.from("Parts").upsert([
           {
             user_id: response.user_id,
             pattern_id: response.pattern_id,
@@ -180,6 +203,37 @@ export const PatternForm = () => {
         submitSinglePart(part);
       });
     };
+    const submitUpdateToPatternDB = async (user_id: string) => {
+      console.log(pattern);
+
+      const { data, error } = await supabaseClient
+        .from("Patterns")
+        .update({
+          headline: pattern.headline,
+          img: pattern.img,
+          notes: pattern.notes,
+          type: pattern.type,
+        })
+        .eq("user_id", user_id)
+        .eq("pattern_id", pattern.pattern_id)
+        .select();
+      if (error) {
+        console.log(error);
+      }
+      if (data) {
+        return data.map((item) => ({
+          created_at: item.created_at,
+          headline: item.headline,
+          img: item.img,
+          notes: item.notes,
+          pattern_id: item.pattern_id,
+          type: item.type,
+          user_id: item.user_id,
+        }));
+      }
+
+      return [];
+    };
 
     let correctForm = false;
     correctForm = checkForm();
@@ -189,11 +243,22 @@ export const PatternForm = () => {
       if (!user_id) {
         console.log("User ID not found in localStorage");
         return;
-      } else {
+      }
+      setShowCompletedSavePopup(true);
+      if (newPattern === "true") {
         try {
-          const response = await submitToPatternDB(user_id);
+          const response = await submitNewToPatternDB(user_id);
           if (response.length > 0) {
-            await submitToPartsDB(response[0]);
+            await submitNewToPartsDB(response[0]);
+          }
+        } catch (error) {
+          console.error("Error saving pattern and parts:", error);
+        }
+      } else if (newPattern === "false") {
+        try {
+          const response = await submitUpdateToPatternDB(user_id);
+          if (response.length > 0) {
+            await submitNewToPartsDB(response[0]);
           }
         } catch (error) {
           console.error("Error saving pattern and parts:", error);
@@ -208,6 +273,27 @@ export const PatternForm = () => {
         <PopuUp
           message={<h3>{message}</h3>}
           onClose={handleClosePopup}
+        ></PopuUp>
+      ) : (
+        <></>
+      )}
+      {showCompletedSavePopup ? (
+        <PopuUp
+          message={
+            <>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="35px"
+                viewBox="0 -960 960 960"
+                width="35px"
+                fill="currentcolor"
+              >
+                <path d="M840-682v495.33q0 27-19.83 46.84Q800.33-120 773.33-120H186.67q-27 0-46.84-19.83Q120-159.67 120-186.67v-586.66q0-27 19.83-46.84Q159.67-840 186.67-840H682l158 158Zm-66.67 29.33L652.67-773.33h-466v586.66h586.66v-466ZM479.84-243.33q45.49 0 77.49-31.85 32-31.84 32-77.33 0-45.49-31.84-77.49-31.84-32-77.33-32-45.49 0-77.49 31.84-32 31.85-32 77.34t31.84 77.49q31.84 32 77.33 32ZM235.33-576H594v-148.67H235.33V-576Zm-48.66-76.67v466-586.66 120.66Z" />
+              </svg>
+              <h4>Your pattern is saved!</h4>
+            </>
+          }
+          onClose={handleCloseCompletedSavePopup}
         ></PopuUp>
       ) : (
         <></>
@@ -313,7 +399,6 @@ export const PatternForm = () => {
             onClick={handleNewPart}
             children={
               <>
-                {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="40px"

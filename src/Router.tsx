@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
         element: <SinglePattern />,
       },
       {
-        path: BASE_URL + "patternForm",
+        path: BASE_URL + "patternForm/:newPattern",
         element: <PatternForm />,
       },
       {

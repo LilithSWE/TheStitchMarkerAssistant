@@ -65,7 +65,7 @@ export const SinglePattern = () => {
 
     fromDispatch({ type: "UPDATE", payload: patternForm });
     setTimeout(() => {
-      navigate(BASE_URL + "patternForm");
+      navigate(BASE_URL + "patternForm/" + false);
     }, 300);
   };
 

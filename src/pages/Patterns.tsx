@@ -49,14 +49,14 @@ export const Patterns = () => {
       type: "CLEAR",
       payload: {
         headline: "",
-        img: "./images/404.png",
+        img: "./images/knitting.png",
         notes: "",
         type: "knitting",
         parts: [],
       },
     });
     setTimeout(() => {
-      navigate(BASE_URL + "patternForm");
+      navigate(BASE_URL + "patternForm/" + true);
     }, 300);
   };
   const handleToRowCounter = () => {
