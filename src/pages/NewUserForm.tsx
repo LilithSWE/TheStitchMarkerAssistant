@@ -115,10 +115,14 @@ export const NewUserForm = () => {
       if (errorContainer) {
         errorContainer.innerText = error.message;
       }
-      setShowLoader(false);
+      setTimeout(() => {
+        setShowLoader(false);
+      }, 1200);
     }
     if (data.user?.id) {
-      setShowLoader(false);
+      setTimeout(() => {
+        setShowLoader(false);
+      }, 1200);
       setShowPopUp(true);
     }
   };

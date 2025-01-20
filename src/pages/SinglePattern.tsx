@@ -46,7 +46,9 @@ export const SinglePattern = () => {
         }));
         setParts(parsedData); // Assign parsed data to state
       }
-      setShowLoader(false);
+      setTimeout(() => {
+        setShowLoader(false);
+      }, 1200);
     };
 
     if (user_id && id) {

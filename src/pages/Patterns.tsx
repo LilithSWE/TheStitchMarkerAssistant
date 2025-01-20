@@ -38,13 +38,16 @@ export const Patterns = () => {
           user_id: item.user_id,
         }));
         setPatterns(parsedData); // Assign parsed data to state
-        setShowLoader(false);
+        setTimeout(() => {
+          setShowLoader(false);
+        }, 1200);
       }
     };
 
     const checkForFreePattern = localStorage.getItem("gotFreePattern");
     if (!checkForFreePattern || checkForFreePattern !== "true") {
       handleRegFreePattern();
+      localStorage.setItem("gotFreePattern", "true");
     }
 
     const user_id = localStorage.getItem("user_id");

@@ -62,10 +62,15 @@ export const Loginform = () => {
     });
     if (error) {
       console.error("Error signing in:", error.message);
-      setShowLoader(false);
+      setTimeout(() => {
+        setShowLoader(false);
+      }, 1200);
+
       return null;
     }
-    setShowLoader(false);
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 1200);
     return {
       user: data.user,
     };

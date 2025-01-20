@@ -70,8 +70,10 @@ export const ForgotPassword = () => {
       if (errorContainer) errorContainer.innerText = error.message;
     } else {
       console.log("Password reset email sent successfully:", data);
-      setShowLoader(false);
-      setShowPopUp(true);
+      setTimeout(() => {
+        setShowLoader(false);
+        setShowPopUp(true);
+      }, 1200);
     }
   };
 

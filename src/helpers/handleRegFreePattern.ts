@@ -877,7 +877,6 @@ export const handleRegFreePattern = async () => {
     } catch (error) {
       console.error("Error saving pattern and parts:", error);
     }
-    localStorage.setItem("gotFreePattern", "true");
   } catch (error) {
     console.error("Error saving pattern and parts:", error);
   }

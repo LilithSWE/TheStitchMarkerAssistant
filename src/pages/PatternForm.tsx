@@ -267,7 +267,9 @@ export const PatternForm = () => {
         }
       }
     }
-    setShowLoader(false);
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 1200);
   };
 
   return (
