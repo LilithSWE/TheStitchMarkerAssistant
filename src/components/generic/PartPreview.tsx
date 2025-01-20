@@ -75,8 +75,8 @@ export const PartPreview = ({ part }: SinglePartProps) => {
       )}
       <article>
         <h4>Instructions</h4>
-        {part.rows.map((row) => (
-          <div className="rowInstructionContainer" key={row.row_start}>
+        {part.rows.map((row, index) => (
+          <div className="rowInstructionContainer" key={index}>
             {row.amount_of_rows > 1 ? (
               <p>
                 {row.row_start} - {row.row_start + row.amount_of_rows - 1}.

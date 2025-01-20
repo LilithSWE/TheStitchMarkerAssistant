@@ -9,12 +9,13 @@ import { PatternPreview } from "../components/generic/PatternPreview";
 import { Button } from "../components/generic/Button";
 import { PatternFormDispatchContext } from "../context/PatternFormDispatchContext";
 import { Loader } from "../components/generic/Loader";
+import { handleRegFreePattern } from "../helpers/handleRegFreePattern";
 
 export const Patterns = () => {
   const [patterns, setPatterns] = useState<FetchedPattern[]>([]);
   const navigate = useNavigate();
   const fromDispatch = useContext(PatternFormDispatchContext);
-  const [showLoader, setShowLoader] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
     const getAllPatterns = async (user_id: string) => {
@@ -40,6 +41,11 @@ export const Patterns = () => {
         setShowLoader(false);
       }
     };
+
+    const checkForFreePattern = localStorage.getItem("gotFreePattern");
+    if (!checkForFreePattern || checkForFreePattern !== "true") {
+      handleRegFreePattern();
+    }
 
     const user_id = localStorage.getItem("user_id");
     if (user_id) {

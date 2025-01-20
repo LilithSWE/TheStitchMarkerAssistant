@@ -165,10 +165,8 @@ export const PatternForm = () => {
         .select();
       if (error) {
         console.log(error);
-        setShowLoader(false);
       }
       if (data) {
-        setShowLoader(false);
         return data.map((item) => ({
           created_at: item.created_at,
           headline: item.headline,
@@ -269,6 +267,7 @@ export const PatternForm = () => {
         }
       }
     }
+    setShowLoader(false);
   };
 
   return (
