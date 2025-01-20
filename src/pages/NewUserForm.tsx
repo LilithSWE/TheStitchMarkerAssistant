@@ -24,10 +24,12 @@ export const NewUserForm = () => {
   });
   const [showPopUp, setShowPopUp] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+  const [enableRegistration, setEnableRegistration] = useState(true);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
     e.target.classList.remove("error");
+    setEnableRegistration(true);
   };
 
   const errorMessage = (
@@ -40,6 +42,7 @@ export const NewUserForm = () => {
         /* REGISTER USER IN THE DATABASE */
         return;
       } else {
+        setEnableRegistration(false);
         errorContainer.innerText = "Please edit in the following fields: [";
       }
       if (username == "") {
@@ -64,6 +67,26 @@ export const NewUserForm = () => {
   const handleSubmit = () => {
     const emailIsValid = validateEmail(userInput.email);
     const passwordIsValid = validatePassword(userInput.password);
+
+    if (
+      userInput.email === "" &&
+      userInput.password === "" &&
+      userInput.username === ""
+    ) {
+      setEnableRegistration(false);
+      if (errorContainer) {
+        errorContainer.innerText =
+          "Please write something in the fields above.";
+      }
+      const input = document.getElementById("regNameInput");
+      input?.classList.add("error");
+      const input2 = document.getElementById("regEmailInput");
+      input2?.classList.add("error");
+      const input3 = document.getElementById("regPasswordInput");
+      input3?.classList.add("error");
+      return;
+    }
+
     errorMessage(userInput.username, emailIsValid, passwordIsValid);
     if (userInput.username != "" && emailIsValid && passwordIsValid) {
       registerNewUser(userInput.username, userInput.email, userInput.password);
@@ -161,9 +184,15 @@ export const NewUserForm = () => {
           <p id="errorMsg"></p>
         </form>
         <div className="primaryBtnContainer">
-          <Button bgColor="secondary" onClick={handleSubmit}>
-            <>Register</>
-          </Button>
+          {enableRegistration ? (
+            <Button bgColor="secondary" onClick={handleSubmit}>
+              <>Register</>
+            </Button>
+          ) : (
+            <Button bgColor="disabled" onClick={handleSubmit}>
+              <>Register</>
+            </Button>
+          )}
           <Button bgColor="return" onClick={handleReturn}>
             <>Return</>
           </Button>

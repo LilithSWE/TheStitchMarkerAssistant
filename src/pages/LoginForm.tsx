@@ -16,7 +16,7 @@ export const Loginform = () => {
   const navigate = useNavigate();
   const errorContainer = document.getElementById("errorMsg");
   const [userInput, setUserInput] = useState<User>({ email: "", password: "" });
-  const [enableLogin, setEnableLogin] = useState(false);
+  const [enableLogin, setEnableLogin] = useState(true);
   const [showLoader, setShowLoader] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -74,6 +74,20 @@ export const Loginform = () => {
   const handleSubmit = () => {
     const emailIsValid = validateEmail(userInput.email);
     const passwordIsValid = validatePassword(userInput.password);
+
+    if (userInput.email === "" && userInput.password === "") {
+      setEnableLogin(false);
+      if (errorContainer) {
+        errorContainer.innerText =
+          "Please write something in the fields above.";
+      }
+      const input = document.getElementById("loginEmailInput");
+      input?.classList.add("error");
+      const input2 = document.getElementById("loginPasswordInput");
+      input2?.classList.add("error");
+      return;
+    }
+
     errorMessage(emailIsValid, passwordIsValid);
     if (emailIsValid && passwordIsValid) {
       signInUser(userInput.email, userInput.password).then((userInfo) => {
