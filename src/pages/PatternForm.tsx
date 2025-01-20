@@ -269,7 +269,7 @@ export const PatternForm = () => {
     }
     setTimeout(() => {
       setShowLoader(false);
-    }, 1200);
+    }, 750);
   };
 
   return (

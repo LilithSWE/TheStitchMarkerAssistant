@@ -64,13 +64,13 @@ export const Loginform = () => {
       console.error("Error signing in:", error.message);
       setTimeout(() => {
         setShowLoader(false);
-      }, 1200);
+      }, 750);
 
       return null;
     }
     setTimeout(() => {
       setShowLoader(false);
-    }, 1200);
+    }, 750);
     return {
       user: data.user,
     };

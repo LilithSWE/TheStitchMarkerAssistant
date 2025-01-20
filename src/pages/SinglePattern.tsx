@@ -48,7 +48,7 @@ export const SinglePattern = () => {
       }
       setTimeout(() => {
         setShowLoader(false);
-      }, 1200);
+      }, 750);
     };
 
     if (user_id && id) {

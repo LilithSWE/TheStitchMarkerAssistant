@@ -40,7 +40,7 @@ export const Patterns = () => {
         setPatterns(parsedData); // Assign parsed data to state
         setTimeout(() => {
           setShowLoader(false);
-        }, 1200);
+        }, 750);
       }
     };
 

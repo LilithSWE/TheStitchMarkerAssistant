@@ -117,12 +117,12 @@ export const NewUserForm = () => {
       }
       setTimeout(() => {
         setShowLoader(false);
-      }, 1200);
+      }, 750);
     }
     if (data.user?.id) {
       setTimeout(() => {
         setShowLoader(false);
-      }, 1200);
+      }, 750);
       setShowPopUp(true);
     }
   };

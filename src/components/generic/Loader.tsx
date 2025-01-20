@@ -10,7 +10,7 @@ export const Loader = () => {
             src="https://lottie.host/6184487d-13a3-4dee-892d-119d47979427/9YJwBBaLjd.lottie"
             loop
             autoplay
-            speed={2.5}
+            speed={4}
           />
         </div>
       </div>

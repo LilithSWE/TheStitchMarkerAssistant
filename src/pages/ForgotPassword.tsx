@@ -73,7 +73,7 @@ export const ForgotPassword = () => {
       setTimeout(() => {
         setShowLoader(false);
         setShowPopUp(true);
-      }, 1200);
+      }, 750);
     }
   };
 
