@@ -11,15 +11,16 @@ import { PatternFormDispatchContext } from "../context/PatternFormDispatchContex
 import { Part } from "../models/Part";
 import { Pattern } from "../models/Pattern";
 import { PopuUp } from "../components/generic/PopUp";
+import { Loader } from "../components/generic/Loader";
 
 export const SinglePattern = () => {
   const navigate = useNavigate();
-  const BASE_URL = "/TheStitchMarkerAssistant/";
   const pattern = useContext(PatternContext);
   const fromDispatch = useContext(PatternFormDispatchContext);
   const [parts, setParts] = useState<Part[]>([]);
   const [showPopUp, setShowPopUp] = useState(false);
   const [showWarningPopUp, setShowWarningPopUp] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   const { id } = useParams();
   const user_id = localStorage.getItem("user_id");
 
@@ -45,6 +46,7 @@ export const SinglePattern = () => {
         }));
         setParts(parsedData); // Assign parsed data to state
       }
+      setShowLoader(false);
     };
 
     if (user_id && id) {
@@ -65,7 +67,7 @@ export const SinglePattern = () => {
 
     fromDispatch({ type: "UPDATE", payload: patternForm });
     setTimeout(() => {
-      navigate(BASE_URL + "patternForm/" + false);
+      navigate("/patternForm/" + false);
     }, 300);
   };
 
@@ -115,17 +117,17 @@ export const SinglePattern = () => {
 
   const handleToPatterns = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "patterns");
+      navigate("/patterns");
     }, 300);
   };
   const handleToHome = () => {
     setTimeout(() => {
-      navigate(BASE_URL);
+      navigate("/");
     }, 300);
   };
   const handleToSettings = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "settings");
+      navigate("/settings");
     }, 300);
   };
 
@@ -185,6 +187,7 @@ export const SinglePattern = () => {
 
   return (
     <>
+      {showLoader ? <Loader /> : <></>}
       {showWarningPopUp ? (
         <div className="overlay">
           <div className="popup">

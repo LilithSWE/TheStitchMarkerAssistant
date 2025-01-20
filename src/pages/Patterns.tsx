@@ -8,15 +8,17 @@ import supabaseClient from "../services/supabaseClient";
 import { PatternPreview } from "../components/generic/PatternPreview";
 import { Button } from "../components/generic/Button";
 import { PatternFormDispatchContext } from "../context/PatternFormDispatchContext";
+import { Loader } from "../components/generic/Loader";
 
 export const Patterns = () => {
   const [patterns, setPatterns] = useState<FetchedPattern[]>([]);
   const navigate = useNavigate();
-  const BASE_URL = "/TheStitchMarkerAssistant/";
   const fromDispatch = useContext(PatternFormDispatchContext);
+  const [showLoader, setShowLoader] = useState(false);
 
   useEffect(() => {
     const getAllPatterns = async (user_id: string) => {
+      setShowLoader(true);
       const { data, error } = await supabaseClient
         .from("Patterns")
         .select()
@@ -35,6 +37,7 @@ export const Patterns = () => {
           user_id: item.user_id,
         }));
         setPatterns(parsedData); // Assign parsed data to state
+        setShowLoader(false);
       }
     };
 
@@ -56,22 +59,22 @@ export const Patterns = () => {
       },
     });
     setTimeout(() => {
-      navigate(BASE_URL + "patternForm/" + true);
+      navigate("/patternForm/" + true);
     }, 300);
   };
   const handleToRowCounter = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "rowcounter");
+      navigate("/rowcounter");
     }, 300);
   };
   const handleToHome = () => {
     setTimeout(() => {
-      navigate(BASE_URL);
+      navigate("/");
     }, 300);
   };
   const handleToSettings = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "settings");
+      navigate("/settings");
     }, 300);
   };
   const navButtons: NavButtonProps[] = [
@@ -130,6 +133,7 @@ export const Patterns = () => {
 
   return (
     <>
+      {showLoader ? <Loader /> : <></>}
       <HeaderSmall bgColor="primary" />
       <section className="secondView">
         <h2>Patterns</h2>

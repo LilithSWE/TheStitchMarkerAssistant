@@ -10,10 +10,10 @@ import supabaseClient from "../services/supabaseClient";
 import { PopuUp } from "../components/generic/PopUp";
 import { FetchedPattern } from "../models/FetchedPattern";
 import { Part } from "../models/Part";
+import { Loader } from "../components/generic/Loader";
 
 export const PatternForm = () => {
   const navigate = useNavigate();
-  const BASE_URL = "/TheStitchMarkerAssistant/";
   const pattern = useContext(PatternFormContext);
   const formDispatch = useContext(PatternFormDispatchContext);
   const [showPopUp, setShowPopUp] = useState(false);
@@ -22,6 +22,7 @@ export const PatternForm = () => {
   const nameOfImage = pattern.img?.replace("./images/", "");
   const [message, setMessage] = useState("I have no more info..");
   const { newPattern } = useParams();
+  const [showLoader, setShowLoader] = useState(false);
 
   const getRandomInt = () => {
     let inUse = true;
@@ -51,11 +52,11 @@ export const PatternForm = () => {
   const handleReturn = () => {
     if (pattern.pattern_id) {
       setTimeout(() => {
-        navigate(BASE_URL + "pattern/" + pattern.pattern_id);
+        navigate("/pattern/" + pattern.pattern_id);
       }, 300);
     } else {
       setTimeout(() => {
-        navigate(BASE_URL + "patterns");
+        navigate("/patterns");
       }, 300);
     }
   };
@@ -72,7 +73,7 @@ export const PatternForm = () => {
     const section = document.querySelector("section");
     section?.classList.remove("blur");
     setTimeout(() => {
-      navigate(BASE_URL + "patterns");
+      navigate("/patterns");
       setShowCompletedSavePopup(false);
     }, 300);
   };
@@ -148,6 +149,7 @@ export const PatternForm = () => {
   };
 
   const handleSavePattern = async () => {
+    setShowLoader(true);
     const submitNewToPatternDB = async (user_id: string) => {
       const { data, error } = await supabaseClient
         .from("Patterns")
@@ -163,8 +165,10 @@ export const PatternForm = () => {
         .select();
       if (error) {
         console.log(error);
+        setShowLoader(false);
       }
       if (data) {
+        setShowLoader(false);
         return data.map((item) => ({
           created_at: item.created_at,
           headline: item.headline,
@@ -269,6 +273,7 @@ export const PatternForm = () => {
 
   return (
     <>
+      {showLoader ? <Loader /> : <></>}
       {showPopUp ? (
         <PopuUp
           message={<h3>{message}</h3>}
@@ -369,7 +374,7 @@ export const PatternForm = () => {
                   children={<>Knitting</>}
                 />
                 <Button
-                  bgColor="disabled"
+                  bgColor="grey"
                   onClick={() => handleSwitchType("crochet")}
                   children={<>Crochet</>}
                 />
@@ -377,7 +382,7 @@ export const PatternForm = () => {
             ) : (
               <>
                 <Button
-                  bgColor="disabled"
+                  bgColor="grey"
                   onClick={() => handleSwitchType("knitting")}
                   children={<>Knitting</>}
                 />

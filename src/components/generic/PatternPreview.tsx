@@ -10,12 +10,11 @@ type SinglePatternProps = {
 export const PatternPreview = ({ pattern }: SinglePatternProps) => {
   const dispatch = useContext(PatternDispatchContext);
   const navigate = useNavigate();
-  const BASE_URL = "/TheStitchMarkerAssistant/";
 
   const handleOpenPattern = () => {
     dispatch({ type: "NEW", payload: pattern });
     setTimeout(() => {
-      navigate(BASE_URL + "pattern/" + pattern.pattern_id);
+      navigate("/pattern/" + pattern.pattern_id);
     }, 300);
   };
 

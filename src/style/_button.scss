@@ -11,15 +11,6 @@ button {
   margin-bottom: 0.5rem;
 }
 
-button:disabled {
-  background-color: gray;
-}
-
-button:hover {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  transform: scale(1.03);
-}
-
 button:active {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
   transform: scale(0.97);

@@ -21,7 +21,6 @@ export const RowCounter = () => {
   );
   const [showPopUp, setShowPopUp] = useState(false);
   const navigate = useNavigate();
-  const BASE_URL = "/TheStitchMarkerAssistant/";
 
   useEffect(() => {
     const oldCount = localStorage.getItem("currentCount");
@@ -69,17 +68,17 @@ export const RowCounter = () => {
   /* Navigation */
   const handleToHome = () => {
     setTimeout(() => {
-      navigate(BASE_URL);
+      navigate("/");
     }, 300);
   };
   const handleToPatterns = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "patterns");
+      navigate("/patterns");
     }, 300);
   };
   const handleToSettings = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "settings");
+      navigate("/settings");
     }, 300);
   };
   const handleReturn = () => {

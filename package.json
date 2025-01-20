@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.12.1",
     "@supabase/supabase-js": "^2.47.10",
     "dotenv": "^16.4.7",
     "multer": "^1.4.5-lts.1",

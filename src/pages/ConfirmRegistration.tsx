@@ -1,8 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/generic/Button";
 import { Headline } from "../components/singular/Headline";
-import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const ConfirmRegistration = () => {
   const navigate = useNavigate();
 
   const handleToLoginForm = () => {
@@ -10,23 +10,14 @@ export const Login = () => {
       navigate("/login");
     }, 300);
   };
-
-  const handleToNewUserForm = () => {
-    setTimeout(() => {
-      navigate("/newUser");
-    }, 300);
-  };
-
   return (
     <>
       <section className="firstView">
         <Headline />
+        <h3 className="headlineSpacing">Thank you for registering!</h3>
         <div className="primaryBtnContainer">
           <Button bgColor="primary" onClick={handleToLoginForm}>
             <>Log In</>
-          </Button>
-          <Button bgColor="secondary" onClick={handleToNewUserForm}>
-            <>New User</>
           </Button>
         </div>
       </section>

@@ -13,7 +13,6 @@ type SinglePartProps = {
 export const PartPreview = ({ part }: SinglePartProps) => {
   const pattern = useContext(PatternContext);
   const navigate = useNavigate();
-  const BASE_URL = "/TheStitchMarkerAssistant/";
 
   const calculateRows = () => {
     const rows: Row[] = part.rows;
@@ -44,7 +43,7 @@ export const PartPreview = ({ part }: SinglePartProps) => {
     localStorage.setItem("currentRows", JSON.stringify(currentRows));
 
     setTimeout(() => {
-      navigate(BASE_URL + "rowcounter");
+      navigate("/rowcounter");
     }, 300);
   };
 

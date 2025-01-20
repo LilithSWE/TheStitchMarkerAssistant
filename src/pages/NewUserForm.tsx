@@ -6,6 +6,7 @@ import { validateEmail } from "../helpers/validateEmail";
 import { validatePassword } from "../helpers/validatePassword";
 import supabaseClient from "../services/supabaseClient";
 import { PopuUp } from "../components/generic/PopUp";
+import { Loader } from "../components/generic/Loader";
 
 type NewUser = {
   username: string;
@@ -15,7 +16,6 @@ type NewUser = {
 
 export const NewUserForm = () => {
   const navigate = useNavigate();
-  const BASE_URL = "/TheStitchMarkerAssistant";
   const errorContainer = document.getElementById("errorMsg");
   const [userInput, setUserInput] = useState<NewUser>({
     username: "",
@@ -23,6 +23,7 @@ export const NewUserForm = () => {
     password: "",
   });
   const [showPopUp, setShowPopUp] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
@@ -74,6 +75,7 @@ export const NewUserForm = () => {
     email: string,
     password: string
   ) => {
+    setShowLoader(true);
     const { data, error } = await supabaseClient.auth.signUp({
       email: email,
       password: password,
@@ -81,6 +83,8 @@ export const NewUserForm = () => {
         data: {
           first_name: username,
         },
+        emailRedirectTo:
+          "https://lilithswe.github.io/TheStitchMarkerAssistant/#/confirm",
       },
     });
     if (error) {
@@ -88,15 +92,17 @@ export const NewUserForm = () => {
       if (errorContainer) {
         errorContainer.innerText = error.message;
       }
+      setShowLoader(false);
     }
     if (data.user?.id) {
+      setShowLoader(false);
       setShowPopUp(true);
     }
   };
 
   const handleReturn = () => {
     setTimeout(() => {
-      navigate(BASE_URL);
+      navigate("/");
     }, 300);
     const section = document.querySelector("section");
     section?.classList.remove("blur");
@@ -104,6 +110,7 @@ export const NewUserForm = () => {
 
   return (
     <>
+      {showLoader ? <Loader /> : <></>}
       {showPopUp ? (
         <PopuUp
           message={
@@ -116,7 +123,7 @@ export const NewUserForm = () => {
               <p>
                 <span>"Confirm your mail"</span>
               </p>
-              <p>link in the email we sent from Supabase Auth!</p>
+              <p>link in the email we sent from The Stitch Marker Assistant!</p>
             </>
           }
           onClose={handleReturn}

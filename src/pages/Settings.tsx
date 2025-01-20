@@ -7,7 +7,6 @@ import { HeaderSmall } from "../components/singular/HeaderSmall";
 
 export const Settings = () => {
   const navigate = useNavigate();
-  const BASE_URL = "/TheStitchMarkerAssistant/";
   const [lightTheme, setLightTheme] = useState(true);
 
   const setChangThemeBtn = () => {
@@ -42,17 +41,17 @@ export const Settings = () => {
   };
   const handleToRowCounter = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "rowcounter");
+      navigate("/rowcounter");
     }, 300);
   };
   const handleToHome = () => {
     setTimeout(() => {
-      navigate(BASE_URL);
+      navigate("/");
     }, 300);
   };
   const handleToPatterns = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "patterns");
+      navigate("/patterns");
     }, 300);
   };
   const navButtons: NavButtonProps[] = [

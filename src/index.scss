@@ -9,6 +9,9 @@
 @media only screen and (min-width: 1025px) {
   @import "./style/_desktop";
 }
+@media (hover: hover) {
+  @import "./style/_hover.scss";
+}
 
 body.light {
   color: black;
@@ -32,6 +35,10 @@ body.light {
   .popup {
     background-color: $bodyBg;
     border: 3px solid black;
+  }
+  .loader {
+    background-color: $bodyBg;
+    border: 1px solid black;
   }
   .patternPreview {
     background-color: $tetriary;
@@ -64,6 +71,10 @@ body.dark {
   .popup {
     background-color: $darkBodyBg;
     border: 3px solid $softWhite;
+  }
+  .loader {
+    background-color: $darkBodyBg;
+    border: 1px solid $softWhite;
   }
   .patternPreview {
     background-color: $darkTetriary;

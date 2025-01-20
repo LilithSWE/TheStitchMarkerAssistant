@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 export const Start = () => {
   const navigate = useNavigate();
-  const BASE_URL = "/TheStitchMarkerAssistant";
   const [hasProjectStarted, setHasProjectStarted] = useState(false);
 
   useEffect(() => {
@@ -17,17 +16,17 @@ export const Start = () => {
 
   const handleToRowcounter = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "/rowcounter");
+      navigate("/rowcounter");
     }, 300);
   };
   const handleToPatterns = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "/patterns");
+      navigate("/patterns");
     }, 300);
   };
   const handleToSettings = () => {
     setTimeout(() => {
-      navigate(BASE_URL + "/settings");
+      navigate("/settings");
     }, 300);
   };
 
