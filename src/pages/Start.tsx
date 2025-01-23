@@ -8,6 +8,13 @@ export const Start = () => {
   const [hasProjectStarted, setHasProjectStarted] = useState(false);
 
   useEffect(() => {
+    const primaryBtnContainer = document.getElementById("primaryBtnContainer");
+    primaryBtnContainer?.classList.add("fadeOut");
+    setTimeout(() => {
+      primaryBtnContainer?.classList.remove("fadeOut");
+      primaryBtnContainer?.classList.add("fadeIn");
+    }, 100);
+
     const project = localStorage.getItem("currentPiece");
     if (project) {
       setHasProjectStarted(true);
@@ -34,7 +41,7 @@ export const Start = () => {
     <>
       <section className="firstView">
         <Headline />
-        <div className="primaryBtnContainer">
+        <div className="primaryBtnContainer" id="primaryBtnContainer">
           {hasProjectStarted ? (
             <Button bgColor="tetriary" onClick={handleToRowcounter}>
               <div className="btnText">

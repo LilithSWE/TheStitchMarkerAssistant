@@ -23,6 +23,15 @@ export const RowCounter = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const counterContainersFade = document.getElementById(
+      "counterContainersFade"
+    );
+    counterContainersFade?.classList.add("fadeOut");
+    setTimeout(() => {
+      counterContainersFade?.classList.remove("fadeOut");
+      counterContainersFade?.classList.add("fadeIn");
+    }, 100);
+
     const oldCount = localStorage.getItem("currentCount");
     const piece = localStorage.getItem("currentPiece");
     const rows = localStorage.getItem("currentRows");
@@ -82,9 +91,13 @@ export const RowCounter = () => {
     }, 300);
   };
   const handleReturn = () => {
-    const section = document.querySelector("section");
-    section?.classList.remove("blur");
-    setShowPopUp(false);
+    const popup = document.getElementById("popup");
+    popup?.classList.add("fadeOut");
+    setTimeout(() => {
+      const section = document.querySelector("section");
+      section?.classList.remove("blur");
+      setShowPopUp(false);
+    }, 400);
   };
   const navButtons: NavButtonProps[] = [
     {
@@ -156,40 +169,42 @@ export const RowCounter = () => {
           <h2 className="rowCounterHeadline">Rowcounter</h2>
           <p className="patternInfo">{patternAndPartName}</p>
         </div>
-        <div className="rowContent">
-          <p>{rowContent}</p>
-        </div>
-
-        <div className="counterContainer">
-          <Button bgColor="primary plus" onClick={handleAddition}>
-            <>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="40px"
-                viewBox="0 -960 960 960"
-                width="40px"
-                fill="#currentColor"
-              >
-                <path d="M446.67-446.67H200v-66.66h246.67V-760h66.66v246.67H760v66.66H513.33V-200h-66.66v-246.67Z" />
-              </svg>
-            </>
-          </Button>
-          <div className="count">
-            <p>{count}</p>
+        <div id="counterContainersFade">
+          <div className="rowContent">
+            <p>{rowContent}</p>
           </div>
-          <Button bgColor="secondary minus" onClick={handleSubtraction}>
-            <>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="40px"
-                viewBox="0 -960 960 960"
-                width="40px"
-                fill="#currentcolor"
-              >
-                <path d="M200-446.67v-66.66h560v66.66H200Z" />
-              </svg>
-            </>
-          </Button>
+
+          <div className="counterContainer">
+            <Button bgColor="primary plus" onClick={handleAddition}>
+              <>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="40px"
+                  viewBox="0 -960 960 960"
+                  width="40px"
+                  fill="#currentColor"
+                >
+                  <path d="M446.67-446.67H200v-66.66h246.67V-760h66.66v246.67H760v66.66H513.33V-200h-66.66v-246.67Z" />
+                </svg>
+              </>
+            </Button>
+            <div className="count">
+              <p>{count}</p>
+            </div>
+            <Button bgColor="secondary minus" onClick={handleSubtraction}>
+              <>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="40px"
+                  viewBox="0 -960 960 960"
+                  width="40px"
+                  fill="#currentcolor"
+                >
+                  <path d="M200-446.67v-66.66h560v66.66H200Z" />
+                </svg>
+              </>
+            </Button>
+          </div>
         </div>
       </section>
       <Nav bgColor="tetriary" buttons={navButtons} />

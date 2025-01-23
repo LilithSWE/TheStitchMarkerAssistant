@@ -63,11 +63,19 @@ export const Loginform = () => {
     if (error) {
       console.error("Error signing in:", error.message);
       setTimeout(() => {
+        const loader = document.getElementById("loader");
+        loader?.classList.add("fadeOut");
+      }, 650);
+      setTimeout(() => {
         setShowLoader(false);
       }, 750);
 
       return null;
     }
+    setTimeout(() => {
+      const loader = document.getElementById("loader");
+      loader?.classList.add("fadeOut");
+    }, 650);
     setTimeout(() => {
       setShowLoader(false);
     }, 750);

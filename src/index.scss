@@ -28,6 +28,9 @@ body.light {
     color: black;
     background-color: $tetriary;
   }
+  div.welcomeScreen {
+    background-color: $bodyBg;
+  }
   input,
   .count {
     background-color: $inputBg;
@@ -62,6 +65,9 @@ body.dark {
   .tetriary {
     color: black;
     background-color: $darkTetriary;
+  }
+  div.welcomeScreen {
+    background-color: $darkBodyBg;
   }
   input,
   .count {

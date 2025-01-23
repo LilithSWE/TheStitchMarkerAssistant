@@ -25,7 +25,10 @@ export const SinglePattern = () => {
   const user_id = localStorage.getItem("user_id");
 
   useEffect(() => {
-    const getSinglePattern = async (user_id: string, pattern_id: string) => {
+    const getSinglePatternParts = async (
+      user_id: string,
+      pattern_id: string
+    ) => {
       const { data, error } = await supabaseClient
         .from("Parts")
         .select()
@@ -47,12 +50,16 @@ export const SinglePattern = () => {
         setParts(parsedData); // Assign parsed data to state
       }
       setTimeout(() => {
+        const loader = document.getElementById("loader");
+        loader?.classList.add("fadeOut");
+      }, 650);
+      setTimeout(() => {
         setShowLoader(false);
       }, 750);
     };
 
     if (user_id && id) {
-      getSinglePattern(user_id, id);
+      getSinglePatternParts(user_id, id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -90,6 +97,8 @@ export const SinglePattern = () => {
     if (user_id && id) {
       deleteFromDB(user_id, id);
     }
+    const popup = document.getElementById("popup");
+    popup?.classList.add("fadeOut");
     setShowWarningPopUp(false);
     setShowPopUp(true);
   };
@@ -103,6 +112,8 @@ export const SinglePattern = () => {
   const handleCloseWarningPopup = () => {
     const section = document.querySelector("section");
     section?.classList.remove("blur");
+    const popup = document.getElementById("popup");
+    popup?.classList.add("fadeOut");
     setTimeout(() => {
       setShowWarningPopUp(false);
     }, 300);
@@ -111,6 +122,8 @@ export const SinglePattern = () => {
   const handleClosePopUp = () => {
     const section = document.querySelector("section");
     section?.classList.remove("blur");
+    const popup = document.getElementById("popup");
+    popup?.classList.add("fadeOut");
     setTimeout(() => {
       setShowPopUp(false);
     }, 300);

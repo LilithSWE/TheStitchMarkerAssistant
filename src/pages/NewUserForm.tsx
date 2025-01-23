@@ -116,10 +116,19 @@ export const NewUserForm = () => {
         errorContainer.innerText = error.message;
       }
       setTimeout(() => {
+        const loader = document.getElementById("loader");
+        loader?.classList.add("fadeOut");
+      }, 650);
+      setTimeout(() => {
         setShowLoader(false);
       }, 750);
     }
+
     if (data.user?.id) {
+      setTimeout(() => {
+        const loader = document.getElementById("loader");
+        loader?.classList.add("fadeOut");
+      }, 650);
       setTimeout(() => {
         setShowLoader(false);
       }, 750);
@@ -128,6 +137,8 @@ export const NewUserForm = () => {
   };
 
   const handleReturn = () => {
+    const popup = document.getElementById("popup");
+    popup?.classList.add("fadeOut");
     setTimeout(() => {
       navigate("/");
     }, 300);

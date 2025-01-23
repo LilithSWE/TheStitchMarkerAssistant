@@ -64,6 +64,8 @@ export const PatternForm = () => {
   const handleClosePopup = () => {
     const section = document.querySelector("section");
     section?.classList.remove("blur");
+    const popup = document.getElementById("popup");
+    popup?.classList.add("fadeOut");
     setTimeout(() => {
       setShowPopUp(false);
     }, 300);
@@ -72,6 +74,8 @@ export const PatternForm = () => {
   const handleCloseCompletedSavePopup = () => {
     const section = document.querySelector("section");
     section?.classList.remove("blur");
+    const popup = document.getElementById("popup");
+    popup?.classList.add("fadeOut");
     setTimeout(() => {
       navigate("/patterns");
       setShowCompletedSavePopup(false);
@@ -267,6 +271,10 @@ export const PatternForm = () => {
         }
       }
     }
+    setTimeout(() => {
+      const loader = document.getElementById("loader");
+      loader?.classList.add("fadeOut");
+    }, 650);
     setTimeout(() => {
       setShowLoader(false);
     }, 750);

@@ -70,11 +70,40 @@ form {
   margin: 2rem;
 }
 
+.fadeIn {
+  transition: opacity 0.5s ease;
+}
+
+.fadeOut {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
 main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   gap: 10px;
+}
+
+div.welcomeScreen {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  h2 {
+    margin-top: 10rem;
+  }
+  .logo {
+    height: 20rem;
+    width: 20rem;
+  }
 }
 
 section.firstView {
@@ -105,6 +134,46 @@ section.secondView {
   h2 {
     font-weight: 400;
     margin-block: 2rem;
+  }
+  #counterContainersFade {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  #patternPreviewContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .patternPreview {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      grid-template-rows: 5rem;
+      width: 80%;
+      height: 5rem;
+      margin-top: 1rem;
+      align-items: center;
+      transition: all 0.2s;
+      color: black;
+      .patternPreview:active {
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+        transform: scale(0.97);
+      }
+      h4 {
+        overflow: hidden;
+      }
+      img {
+        height: 5rem;
+        width: 5rem;
+        object-fit: cover; /* Do not scale the image */
+        object-position: center;
+        border-right: 4px solid black;
+      }
+    }
   }
 }
 
@@ -443,37 +512,6 @@ article {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-}
-
-.patternPreview {
-  display: grid;
-  grid-template-columns: 5rem 1fr;
-  grid-template-rows: 5rem;
-  width: 80%;
-  height: 5rem;
-  margin-top: 1rem;
-  align-items: center;
-  transition: all 0.2s;
-  color: black;
-  h4 {
-    overflow: hidden;
-  }
-  img {
-    height: 5rem;
-    width: 5rem;
-    object-fit: cover; /* Do not scale the image */
-    object-position: center;
-    border-right: 4px solid black;
-  }
-}
-
-.patternPreview:hover {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  transform: scale(1.03);
-}
-.patternPreview:active {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  transform: scale(0.97);
 }
 
 .rowCounterHeadlineContainer {

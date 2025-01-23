@@ -10,7 +10,7 @@ export const PopuUp = ({ message, onClose }: PopupProps) => {
   section?.classList.add("blur");
   return (
     <div className="overlay">
-      <div className="popup">
+      <div className="popup" id="popup">
         <div>{message}</div>
         <Button bgColor="return" onClick={onClose}>
           <>Close</>

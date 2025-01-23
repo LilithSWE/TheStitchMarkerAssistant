@@ -8,18 +8,15 @@ import supabaseClient from "../services/supabaseClient";
 import { PatternPreview } from "../components/generic/PatternPreview";
 import { Button } from "../components/generic/Button";
 import { PatternFormDispatchContext } from "../context/PatternFormDispatchContext";
-import { Loader } from "../components/generic/Loader";
 import { handleRegFreePattern } from "../helpers/handleRegFreePattern";
 
 export const Patterns = () => {
   const [patterns, setPatterns] = useState<FetchedPattern[]>([]);
   const navigate = useNavigate();
   const fromDispatch = useContext(PatternFormDispatchContext);
-  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
     const getAllPatterns = async (user_id: string) => {
-      setShowLoader(true);
       const { data, error } = await supabaseClient
         .from("Patterns")
         .select()
@@ -38,9 +35,6 @@ export const Patterns = () => {
           user_id: item.user_id,
         }));
         setPatterns(parsedData); // Assign parsed data to state
-        setTimeout(() => {
-          setShowLoader(false);
-        }, 750);
       }
     };
 
@@ -53,6 +47,14 @@ export const Patterns = () => {
     const user_id = localStorage.getItem("user_id");
     if (user_id) {
       getAllPatterns(user_id);
+      const patternPreviewContainer = document.getElementById(
+        "patternPreviewContainer"
+      );
+      patternPreviewContainer?.classList.add("fadeOut");
+      setTimeout(() => {
+        patternPreviewContainer?.classList.remove("fadeOut");
+        patternPreviewContainer?.classList.add("fadeIn");
+      }, 100);
     }
   }, []);
 
@@ -142,7 +144,6 @@ export const Patterns = () => {
 
   return (
     <>
-      {showLoader ? <Loader /> : <></>}
       <HeaderSmall bgColor="primary" />
       <section className="secondView">
         <h2>Patterns</h2>
@@ -162,9 +163,11 @@ export const Patterns = () => {
             </div>
           </Button>
         </div>
-        {patterns.map((pattern) => (
-          <PatternPreview key={pattern.pattern_id} pattern={pattern} />
-        ))}
+        <div id="patternPreviewContainer">
+          {patterns.map((pattern) => (
+            <PatternPreview key={pattern.pattern_id} pattern={pattern} />
+          ))}
+        </div>
       </section>
       <Nav bgColor="primary" buttons={navButtons} />
     </>

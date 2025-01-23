@@ -20,6 +20,11 @@ export const ForgotPassword = () => {
   });
   const [showPopUp, setShowPopUp] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+  const [message, setMessage] = useState(
+    <>
+      <h3>This feature is currently a WIP</h3>
+    </>
+  );
 
   const errorContainer = document.getElementById("errorMsg");
 
@@ -49,6 +54,9 @@ export const ForgotPassword = () => {
   };
 
   const handleReturn = () => {
+    const popup = document.getElementById("popup");
+    popup?.classList.add("fadeOut");
+
     setTimeout(() => {
       navigate("/login");
     }, 300);
@@ -64,14 +72,36 @@ export const ForgotPassword = () => {
   const sendNewPasswordRequest = async (email: string) => {
     setShowLoader(true);
     const { data, error } = await supabaseClient.auth.resetPasswordForEmail(
-      email
+      email,
+      {
+        redirectTo:
+          "https://lilithswe.github.io/TheStitchMarkerAssistant/#/forgotPasswordForm/",
+      }
     );
     if (error) {
       if (errorContainer) errorContainer.innerText = error.message;
-    } else {
-      console.log("Password reset email sent successfully:", data);
+    }
+    if (data) {
+      console.log("Data from sendNewPasswordRequest:", data);
+      setTimeout(() => {
+        const loader = document.getElementById("loader");
+        loader?.classList.add("fadeOut");
+      }, 650);
       setTimeout(() => {
         setShowLoader(false);
+        setMessage(
+          <>
+            <h3>Thank you!</h3>
+            <p>
+              You will shortly recieve an email on the given adress with a link
+              that will lead to the "Reset Password" form.
+            </p>
+            <p>
+              Make sure to check your spam folder if you haven't recived an
+              email within 3 min.
+            </p>
+          </>
+        );
         setShowPopUp(true);
       }, 750);
     }
@@ -90,14 +120,7 @@ export const ForgotPassword = () => {
     <>
       {showLoader ? <Loader /> : <></>}
       {showPopUp ? (
-        <PopuUp
-          message={
-            <>
-              <h3>This feature is currently a WIP</h3>
-            </>
-          }
-          onClose={handleReturn}
-        ></PopuUp>
+        <PopuUp message={message} onClose={handleReturn}></PopuUp>
       ) : (
         <></>
       )}

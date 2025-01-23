@@ -16,6 +16,7 @@ import { Settings } from "./pages/Settings";
 import { SinglePattern } from "./pages/SinglePattern";
 import { ConfirmRegistration } from "./pages/ConfirmRegistration";
 import { ForgotPassword } from "./pages/ForgotPassword";
+import { ForgotPasswordForm } from "./pages/ForgotPasswordForm";
 
 export function App() {
   const [pattern, dispatch] = useReducer(PatternReducer, {
@@ -68,6 +69,10 @@ export function App() {
                   <Route path="/newUser" element={<NewUserForm />} />
                   <Route path="/confirm" element={<ConfirmRegistration />} />
                   <Route path="/forgotPassword" element={<ForgotPassword />} />
+                  <Route
+                    path="/forgotPasswordForm"
+                    element={<ForgotPasswordForm />}
+                  />
                   <Route path="/patterns" element={<Patterns />} />
                   <Route path="/pattern/:id" element={<SinglePattern />} />
                   <Route

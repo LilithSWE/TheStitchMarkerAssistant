@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { NavButtonProps } from "../models/NavButtonProps";
 import { Nav } from "../components/generic/Nav";
 import { HeaderSmall } from "../components/singular/HeaderSmall";
+import supabaseClient from "../services/supabaseClient";
 
 export const Settings = () => {
   const navigate = useNavigate();
@@ -19,6 +20,12 @@ export const Settings = () => {
   };
   useEffect(() => {
     setChangThemeBtn();
+    const primaryBtnContainer = document.getElementById("primaryBtnContainer");
+    primaryBtnContainer?.classList.add("fadeOut");
+    setTimeout(() => {
+      primaryBtnContainer?.classList.remove("fadeOut");
+      primaryBtnContainer?.classList.add("fadeIn");
+    }, 100);
   }, []);
 
   const handleThemeChange = () => {
@@ -34,7 +41,14 @@ export const Settings = () => {
     }
     setChangThemeBtn();
   };
+
+  const submitLogout = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+    console.log(error);
+  };
+
   const handleLogOut = () => {
+    submitLogout();
     localStorage.removeItem("sb-eqnkywknmhgrrrhprwbe-auth-token");
     localStorage.removeItem("user_id");
     handleToHome();
@@ -113,7 +127,7 @@ export const Settings = () => {
       <HeaderSmall bgColor="secondary" />
       <section className="secondView">
         <h2>Settings</h2>
-        <div className="primaryBtnContainer">
+        <div className="primaryBtnContainer" id="primaryBtnContainer">
           {lightTheme ? (
             <Button bgColor="dark" onClick={handleThemeChange}>
               <div className="btnText">
