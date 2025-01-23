@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { Button } from "../components/generic/Button";
 import { PartForm } from "../components/generic/PartForm";
 import { HeaderSmall } from "../components/singular/HeaderSmall";
@@ -23,6 +23,17 @@ export const PatternForm = () => {
   const [message, setMessage] = useState("I have no more info..");
   const { newPattern } = useParams();
   const [showLoader, setShowLoader] = useState(false);
+
+  useEffect(() => {
+    const patternFormContainer = document.getElementById(
+      "patternFormContainer"
+    );
+    patternFormContainer?.classList.add("fadeOut");
+    setTimeout(() => {
+      patternFormContainer?.classList.remove("fadeOut");
+      patternFormContainer?.classList.add("fadeIn");
+    }, 100);
+  }, []);
 
   const getRandomInt = () => {
     let inUse = true;
@@ -250,7 +261,7 @@ export const PatternForm = () => {
         console.log("User ID not found in localStorage");
         return;
       }
-      setShowCompletedSavePopup(true);
+
       if (newPattern === "true") {
         try {
           const response = await submitNewToPatternDB(user_id);
@@ -258,8 +269,20 @@ export const PatternForm = () => {
             await submitNewToPartsDB(response[0]);
           }
         } catch (error) {
+          setMessage(
+            "something went wrong while saving the pattern. Please try again later."
+          );
+          setShowPopUp(true);
           console.error("Error saving pattern and parts:", error);
         }
+        setTimeout(() => {
+          const loader = document.getElementById("loader");
+          loader?.classList.add("fadeOut");
+        }, 650);
+        setTimeout(() => {
+          setShowLoader(false);
+        }, 750);
+        setShowCompletedSavePopup(true);
       } else if (newPattern === "false") {
         try {
           const response = await submitUpdateToPatternDB(user_id);
@@ -267,17 +290,34 @@ export const PatternForm = () => {
             await submitNewToPartsDB(response[0]);
           }
         } catch (error) {
+          setMessage(
+            "something went wrong while saving the pattern. Please try again later."
+          );
+          setShowPopUp(true);
           console.error("Error saving pattern and parts:", error);
         }
+        setTimeout(() => {
+          const loader = document.getElementById("loader");
+          loader?.classList.add("fadeOut");
+        }, 650);
+        setTimeout(() => {
+          setShowLoader(false);
+        }, 750);
+        setShowCompletedSavePopup(true);
+      } else {
+        setMessage(
+          "something went wrong while saving the pattern. Please try again later."
+        );
+        setShowPopUp(true);
+        setTimeout(() => {
+          const loader = document.getElementById("loader");
+          loader?.classList.add("fadeOut");
+        }, 650);
+        setTimeout(() => {
+          setShowLoader(false);
+        }, 750);
       }
     }
-    setTimeout(() => {
-      const loader = document.getElementById("loader");
-      loader?.classList.add("fadeOut");
-    }, 650);
-    setTimeout(() => {
-      setShowLoader(false);
-    }, 750);
   };
 
   return (
@@ -314,8 +354,8 @@ export const PatternForm = () => {
       )}
       <HeaderSmall bgColor="secondary" />
       <section className="secondView">
-        <h2>New Pattern</h2>
-        <section className="patternFormContainer">
+        {newPattern === "true" ? <h2>New Pattern</h2> : <h2>Edit Pattern</h2>}
+        <section className="patternFormContainer" id="patternFormContainer">
           <Button
             children={
               <>
@@ -404,8 +444,8 @@ export const PatternForm = () => {
             )}
           </section>
           <section className="patterFormPartsContainer">
-            {pattern.parts.map((part) => (
-              <PartForm key={part.part_id} part={part} />
+            {pattern.parts.map((part, index) => (
+              <PartForm key={index} part={part} />
             ))}
           </section>
           <Button

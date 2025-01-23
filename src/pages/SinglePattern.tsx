@@ -11,7 +11,6 @@ import { PatternFormDispatchContext } from "../context/PatternFormDispatchContex
 import { Part } from "../models/Part";
 import { Pattern } from "../models/Pattern";
 import { PopuUp } from "../components/generic/PopUp";
-import { Loader } from "../components/generic/Loader";
 
 export const SinglePattern = () => {
   const navigate = useNavigate();
@@ -20,11 +19,18 @@ export const SinglePattern = () => {
   const [parts, setParts] = useState<Part[]>([]);
   const [showPopUp, setShowPopUp] = useState(false);
   const [showWarningPopUp, setShowWarningPopUp] = useState(false);
-  const [showLoader, setShowLoader] = useState(true);
+
   const { id } = useParams();
   const user_id = localStorage.getItem("user_id");
 
   useEffect(() => {
+    const patternView = document.getElementById("patternView");
+    patternView?.classList.add("fadeOut");
+    setTimeout(() => {
+      patternView?.classList.remove("fadeOut");
+      patternView?.classList.add("fadeIn");
+    }, 100);
+
     const getSinglePatternParts = async (
       user_id: string,
       pattern_id: string
@@ -49,13 +55,6 @@ export const SinglePattern = () => {
         }));
         setParts(parsedData); // Assign parsed data to state
       }
-      setTimeout(() => {
-        const loader = document.getElementById("loader");
-        loader?.classList.add("fadeOut");
-      }, 650);
-      setTimeout(() => {
-        setShowLoader(false);
-      }, 750);
     };
 
     if (user_id && id) {
@@ -202,7 +201,6 @@ export const SinglePattern = () => {
 
   return (
     <>
-      {showLoader ? <Loader /> : <></>}
       {showWarningPopUp ? (
         <div className="overlay">
           <div className="popup">
@@ -233,7 +231,7 @@ export const SinglePattern = () => {
         <></>
       )}
       <HeaderSmall bgColor="tetriary" />
-      <section className="patternView">
+      <section className="patternView" id="patternView">
         {pattern.img ? (
           <img src={pattern.img} alt="main pattern image" />
         ) : (
