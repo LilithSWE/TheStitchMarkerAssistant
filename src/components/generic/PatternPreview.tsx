@@ -24,7 +24,7 @@ export const PatternPreview = ({ pattern }: SinglePatternProps) => {
       id={pattern.pattern_id}
       onClick={handleOpenPattern}
     >
-      <img src={pattern.img} alt="" />
+      <img src={pattern.img} loading="lazy" alt="" />
       <h4>{pattern.headline}</h4>
     </section>
   );

@@ -233,7 +233,7 @@ export const SinglePattern = () => {
       <HeaderSmall bgColor="tetriary" />
       <section className="patternView" id="patternView">
         {pattern.img ? (
-          <img src={pattern.img} alt="main pattern image" />
+          <img loading="lazy" src={pattern.img} alt="main pattern image" />
         ) : (
           <></>
         )}

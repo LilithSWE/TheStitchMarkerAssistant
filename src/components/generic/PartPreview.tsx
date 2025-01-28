@@ -50,7 +50,11 @@ export const PartPreview = ({ part }: SinglePartProps) => {
   return (
     <section className="partPreview">
       <h3>{part.headline}</h3>
-      {part.img ? <img src={part.img} alt="part of pattern" /> : <></>}
+      {part.img ? (
+        <img src={part.img} loading="lazy" alt="part of pattern" />
+      ) : (
+        <></>
+      )}
       <Button bgColor="tetriary" onClick={handleStartRowcounter}>
         <div className="btnText">
           <svg
