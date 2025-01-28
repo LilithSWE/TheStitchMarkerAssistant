@@ -5,6 +5,8 @@
   font-weight: 400;
   scroll-behavior: smooth;
   padding-inline: 1.5rem;
+  min-width: 325px;
+  min-height: 600px;
 }
 
 h1,
@@ -86,28 +88,7 @@ main {
   gap: 10px;
 }
 
-div.welcomeScreen {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  h2 {
-    margin-top: 10rem;
-  }
-  .logo {
-    height: 20rem;
-    width: 20rem;
-  }
-}
-
 section.firstView {
-  grid-column: span 2;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -380,7 +361,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 4rem;
   display: flex;
   align-items: center;
@@ -402,7 +383,7 @@ div#nav {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 4rem;
   display: flex;
   justify-content: space-around;
@@ -424,6 +405,9 @@ div#nav {
         font-size: 0.9rem;
       }
     }
+  }
+  button.navBtn:active {
+    opacity: 10%;
   }
 }
 
@@ -570,14 +554,14 @@ article {
   }
 
   .rowContent {
-    height: 20vh;
+    height: 10rem;
   }
 
   .counterContainer {
     margin-top: 3rem;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr;
-    width: 60%;
+    width: clamp(10rem, 60%, 15rem);
     height: 15rem;
     button {
       height: 100%;
@@ -629,6 +613,18 @@ article {
     }
   }
 
+  section.patternFormContainer {
+    width: 70%;
+    button {
+      width: 70%;
+    }
+  }
+
+  .formHeader {
+    width: 100%;
+    border-radius: 0px 0px 25px 25px;
+  }
+
   header {
     top: 0;
     left: 0;
@@ -657,11 +653,9 @@ article {
       display: none;
     }
   }
-
   .rowContent {
     height: 4rem;
   }
-
   .counterContainer {
     margin-top: 1rem;
     grid-template-rows: 1fr;

@@ -1,0 +1,152 @@
+#root {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  height: 100%;
+  width: 100%;
+}
+
+section.firstView {
+  margin-top: 10rem;
+  .logo {
+    margin-bottom: 4rem;
+  }
+  .primaryBtnContainer {
+    width: 25rem;
+  }
+}
+
+section.secondView {
+  width: 70%;
+  align-self: center;
+  h2 {
+    margin: 3rem 0rem 1rem 0rem;
+  }
+  #counterContainersFade {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+  }
+}
+
+section.patternView {
+  width: 80%;
+  img {
+    height: 28rem;
+    width: 28rem;
+  }
+}
+
+section.patternFormContainer {
+  width: 100%;
+  button {
+    width: 60%;
+  }
+}
+
+.popup {
+  width: 60%;
+  padding: 4rem 3rem;
+  svg {
+    height: 70px;
+    width: 70px;
+  }
+  button {
+    align-self: center;
+    width: 60%;
+  }
+}
+
+.rowCounterHeadlineContainer {
+  margin-bottom: 1rem;
+  p {
+    font-size: 1.3rem;
+  }
+}
+.rowContent {
+  width: 80%;
+  font-size: 1.3rem;
+}
+.counterContainer {
+  width: 30vw;
+  .count {
+    font-size: 5rem;
+  }
+  button {
+    svg {
+      height: 5rem;
+      width: 5rem;
+    }
+  }
+}
+
+@media (orientation: landscape) {
+  section.secondView {
+    h2 {
+      font-weight: 400;
+      margin-block: 1rem;
+    }
+    .primaryBtnContainer {
+      margin-top: 1.5rem;
+      width: 60%;
+    }
+  }
+
+  section.patternView {
+    article.patternNotes {
+      width: 85%;
+    }
+    img {
+      height: 10rem;
+      width: 10rem;
+    }
+    button {
+      width: 25rem;
+    }
+    article.patternNotes {
+      margin-top: 2rem;
+    }
+    section.partPreview {
+      width: 85%;
+    }
+  }
+
+  section.patternFormContainer {
+    width: 70%;
+    button {
+      width: 70%;
+    }
+  }
+
+  .popup {
+    width: 50%;
+    padding: 4rem 3rem;
+  }
+
+  .rowCounterHeadlineContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    .rowCounterHeadline {
+      display: flex;
+    }
+  }
+  .rowContent {
+    height: 20rem;
+    width: 100%;
+  }
+  .counterContainer {
+    width: 100%;
+    height: 10rem;
+    button {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

@@ -3,6 +3,14 @@ button:hover {
   transform: scale(1.03);
   cursor: pointer;
 }
+
+button.navBtn:hover {
+  box-shadow: none;
+  transform: scale(1);
+  opacity: 50%;
+  cursor: pointer;
+}
+
 .patternPreview:hover {
   cursor: pointer;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);

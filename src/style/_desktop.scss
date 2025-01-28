@@ -1,0 +1,70 @@
+header {
+  top: 0;
+  left: 0;
+  width: 50%;
+  gap: 0.5rem;
+  border-bottom-right-radius: 0px;
+}
+
+div#nav {
+  top: 0;
+  left: 50%;
+  width: 50vw;
+  height: 4rem;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 25px;
+  border-left: 1px solid black;
+}
+
+.primaryBtnContainer {
+  width: 30%;
+  margin-bottom: 1rem;
+  button {
+    width: 100%;
+  }
+}
+
+section.firstView {
+  margin-top: 20vh;
+}
+
+section.secondView {
+  margin-top: 10vh;
+  h2 {
+    font-size: 2rem;
+  }
+  #patternPreviewContainer {
+    width: 60%;
+  }
+}
+
+section.patternView {
+  width: 60%;
+  img {
+    height: 30rem;
+    width: 30rem;
+  }
+}
+
+section.patternFormContainer {
+  width: 60%;
+}
+
+.counterContainer {
+  height: 20vh;
+  width: clamp(10rem, 40vw, 35rem);
+}
+
+@media (orientation: landscape) {
+  section.secondView {
+    .primaryBtnContainer {
+      margin-top: 3rem;
+      width: 30%;
+    }
+  }
+
+  .popup {
+    width: clamp(10rem, 30%, 35rem);
+  }
+}

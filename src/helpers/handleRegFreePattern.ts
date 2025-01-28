@@ -758,12 +758,7 @@ export const handleRegFreePattern = async () => {
           {
             row_start: 4,
             amount_of_rows: 1,
-            instructions: "Fasten off and sew underneath heal",
-          },
-          {
-            row_start: 5,
-            amount_of_rows: 1,
-            instructions: "",
+            instructions: "Fasten off and sew underneath heel",
           },
         ],
       },

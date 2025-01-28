@@ -78,6 +78,7 @@ export const PatternForm = () => {
     const popup = document.getElementById("popup");
     popup?.classList.add("fadeOut");
     setTimeout(() => {
+      setShowLoader(false);
       setShowPopUp(false);
     }, 300);
   };
@@ -352,7 +353,7 @@ export const PatternForm = () => {
       ) : (
         <></>
       )}
-      <HeaderSmall bgColor="secondary" />
+      <HeaderSmall bgColor="secondary formHeader" />
       <section className="secondView">
         {newPattern === "true" ? <h2>New Pattern</h2> : <h2>Edit Pattern</h2>}
         <section className="patternFormContainer" id="patternFormContainer">

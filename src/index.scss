@@ -3,14 +3,14 @@
 @import "./style/button";
 @import "./style/mobile";
 
-@media only screen and (max-width: 1024px) and (min-width: 641px) {
-  @import "./style/_tablet";
+@media only screen and (min-width: 641px) {
+  @import "./style/tablet";
 }
 @media only screen and (min-width: 1025px) {
-  @import "./style/_desktop";
+  @import "./style/desktop";
 }
 @media (hover: hover) {
-  @import "./style/_hover.scss";
+  @import "./style/hover.scss";
 }
 
 body.light {
