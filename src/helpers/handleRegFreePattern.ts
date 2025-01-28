@@ -799,7 +799,7 @@ export const handleRegFreePattern = async () => {
   };
   const submitNewToPatternDB = async (user_id: string) => {
     if (!user_id) {
-      console.log("User ID not found in localStorage");
+      console.error("User ID not found in localStorage");
       return;
     }
     const { data, error } = await supabaseClient
@@ -815,7 +815,7 @@ export const handleRegFreePattern = async () => {
       ])
       .select();
     if (error) {
-      console.log(error);
+      console.error(error);
     }
     if (data) {
       return data.map((item) => ({
@@ -845,7 +845,7 @@ export const handleRegFreePattern = async () => {
         },
       ]);
       if (error) {
-        console.log(error);
+        console.error(error);
       }
       if (data) {
         console.log(data);
@@ -860,7 +860,7 @@ export const handleRegFreePattern = async () => {
   try {
     const user_id = localStorage.getItem("user_id");
     if (!user_id) {
-      console.log("User ID not found in localStorage");
+      console.error("User ID not found in localStorage");
       return;
     }
 

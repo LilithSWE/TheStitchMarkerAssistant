@@ -34,7 +34,7 @@ export const Home = () => {
             setActiveSession(true);
           }
         } else {
-          console.log("Can't find access_token data");
+          console.error("Can't find access_token data");
           localStorage.removeItem("sb-eqnkywknmhgrrrhprwbe-auth-token");
           localStorage.removeItem("user_id");
           return;

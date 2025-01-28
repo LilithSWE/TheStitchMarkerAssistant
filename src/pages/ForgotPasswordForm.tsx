@@ -26,7 +26,6 @@ export const ForgotPasswordForm = () => {
   const [refreshToken, setRefreshToken] = useState("");
 
   useEffect(() => {
-    // Get the full URL
     const fullHash = window.location.hash;
     // Split the hash to separate the route part and the query parameters part
     const [routePart, queryParamsPart] = fullHash.split("#").slice(1);
@@ -45,7 +44,6 @@ export const ForgotPasswordForm = () => {
     if (accessToken) {
       setShowLoader(true);
 
-      // Log in/ start a session with the access_token in the url from the "reset your password"
       const { data, error } = await supabaseClient.auth.setSession({
         access_token: accessToken,
         refresh_token: refreshToken,
@@ -57,7 +55,7 @@ export const ForgotPasswordForm = () => {
         console.error("Successfull in setting session:", data);
       }
     } else {
-      console.log("Can't find access_token data");
+      console.error("Can't find access_token data");
       if (errorContainer) {
         errorContainer.innerText =
           "Can't find access_token data... please try resetting your password again and follow the new link.";

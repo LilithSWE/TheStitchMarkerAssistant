@@ -22,7 +22,7 @@ export const Patterns = () => {
         .select()
         .eq("user_id", user_id);
       if (error) {
-        console.log(error);
+        console.error(error);
       }
       if (data) {
         const parsedData: FetchedPattern[] = data.map((item) => ({

@@ -44,7 +44,6 @@ export const RowForm = ({ partId, row }: RowProps) => {
       updatedPattern = recalculateAllRowNumbers(updatedPattern);
     }
 
-    // Updates the state for the pattern.
     formDispatch({
       type: "UPDATE",
       payload: updatedPattern,
@@ -56,7 +55,7 @@ export const RowForm = ({ partId, row }: RowProps) => {
     );
     const allRows = currenPart[0].rows;
 
-    // Change all rows accordingly.
+    // Change all rows.row_start accordingly.
     for (let i = 0; i < allRows.length; i++) {
       const row = allRows[i];
       if (i === 0) {
@@ -70,7 +69,7 @@ export const RowForm = ({ partId, row }: RowProps) => {
     const recalculatedPattern: Pattern = {
       ...updatedPattern,
       parts: updatedPattern.parts.map((oldPart) =>
-        oldPart.part_id === partId // Find the correct part
+        oldPart.part_id === partId
           ? {
               ...oldPart,
               ["rows"]: allRows,
@@ -104,7 +103,7 @@ export const RowForm = ({ partId, row }: RowProps) => {
     let updatedPattern: Pattern = {
       ...pattern,
       parts: pattern.parts.map((oldPart) =>
-        oldPart.part_id === partId // Find the correct part
+        oldPart.part_id === partId
           ? {
               ...oldPart,
               ["rows"]: updatedRows,

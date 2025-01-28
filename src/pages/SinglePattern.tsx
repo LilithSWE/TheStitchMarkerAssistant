@@ -41,7 +41,7 @@ export const SinglePattern = () => {
         .eq("user_id", user_id)
         .eq("pattern_id", pattern_id);
       if (error) {
-        console.log(error);
+        console.error(error);
       }
       if (data) {
         const parsedData: Part[] = data.map((item) => ({
@@ -53,7 +53,7 @@ export const SinglePattern = () => {
           rows: item.rows,
           user_id: item.user_id,
         }));
-        setParts(parsedData); // Assign parsed data to state
+        setParts(parsedData);
       }
     };
 
@@ -87,7 +87,7 @@ export const SinglePattern = () => {
         .eq("user_id", user_id)
         .eq("pattern_id", pattern_id);
       if (error) {
-        console.log(error);
+        console.error(error);
       }
       if (data) {
         console.log(data);

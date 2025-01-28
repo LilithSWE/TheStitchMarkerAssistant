@@ -180,7 +180,7 @@ export const PatternForm = () => {
         ])
         .select();
       if (error) {
-        console.log(error);
+        console.error(error);
       }
       if (data) {
         return data.map((item) => ({
@@ -210,7 +210,7 @@ export const PatternForm = () => {
           },
         ]);
         if (error) {
-          console.log(error);
+          console.error(error);
         }
         if (data) {
           console.log(data);
@@ -222,8 +222,6 @@ export const PatternForm = () => {
       });
     };
     const submitUpdateToPatternDB = async (user_id: string) => {
-      console.log(pattern);
-
       const { data, error } = await supabaseClient
         .from("Patterns")
         .update({
@@ -259,7 +257,7 @@ export const PatternForm = () => {
     if (correctForm) {
       const user_id = localStorage.getItem("user_id");
       if (!user_id) {
-        console.log("User ID not found in localStorage");
+        console.error("User ID not found in localStorage");
         return;
       }
 

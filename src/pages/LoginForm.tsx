@@ -108,7 +108,7 @@ export const Loginform = () => {
           localStorage.setItem("user_id", userInfo.user.id);
           handleReturn();
         } else {
-          console.log("Sign-in failed.");
+          console.error("Sign-in failed.");
           if (errorContainer) {
             errorContainer.innerText = "Wrong Email and/or Password!";
           }
