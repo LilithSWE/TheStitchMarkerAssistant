@@ -55,22 +55,22 @@ But in the end I decided to focus on the feedback I got back from my testers and
 
 ### Mobile
 
-<img src="mobile home.png" alt="Mobile Home" width="300">
-<img src="mobile pattern.png" alt="Mobile Pattern" width="300">
-<img src="mobile rowcounter.png" alt="Mobile Rowcounter" width="300">
-<img src="mobile pattern 2.png" alt="Mobile Pattern Landscape" width="600">
-<img src="mobile rowcounter 2.png" alt="Mobile Rowcounter Landscape" width="600">
+<img src="screenshots/mobile home.png" alt="Mobile Home" width="300">
+<img src="screenshots/mobile pattern.png" alt="Mobile Pattern" width="300">
+<img src="screenshots/mobile rowcounter.png" alt="Mobile Rowcounter" width="300">
+<img src="screenshots/mobile pattern 2.png" alt="Mobile Pattern Landscape" width="600">
+<img src="screenshots/mobile rowcounter 2.png" alt="Mobile Rowcounter Landscape" width="600">
 
 ### Tablet
 
-<img src="tablet home.png" alt="Tablet Home" width="400">
-<img src="tablet rowcounter.png" alt="Tablet Rowcounter" width="400">
-<img src="tablet single pattern.png" alt="Tablet Single Pattern" width="400">
-<img src="tablet edit pattern.png" alt="Tablet Edit Pattern" width="400">
+<img src="screenshots/tablet home.png" alt="Tablet Home" width="400">
+<img src="screenshots/tablet rowcounter.png" alt="Tablet Rowcounter" width="400">
+<img src="screenshots/tablet single pattern.png" alt="Tablet Single Pattern" width="400">
+<img src="screenshots/tablet edit pattern.png" alt="Tablet Edit Pattern" width="400">
 
 ### Desktop
 
-<img src="desktop home.png" alt="Desktop Home" width="700">
-<img src="desktop patterns.png" alt="Desktop Patterns" width="700">
-<img src="desktop settings.png" alt="Desktop Settings" width="700">
-<img src="desktop login.png" alt="Desktop Login" width="700">
+<img src="screenshots/desktop home.png" alt="Desktop Home" width="700">
+<img src="screenshots/desktop patterns.png" alt="Desktop Patterns" width="700">
+<img src="screenshots/desktop settings.png" alt="Desktop Settings" width="700">
+<img src="screenshots/desktop login.png" alt="Desktop Login" width="700">
