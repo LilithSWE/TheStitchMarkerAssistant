@@ -5,44 +5,72 @@ knitting and crochet endeavors.
 
 The main feature being multiple row counters with
 easy-to-read information, specific to the row you are currently on, for your various
-saved projects. Also including links to instructional videos on how to perform various
-stitches and maneuvers such as color changes. Type in your patterns once and see
-instruction row for row as you hit the “+” button on the counter
+saved projects. Type in your patterns once and see
+instruction row for row as you hit the “+” button on the counter.
+
+Link to live project: [The Stitch Marker Assistant](https://lilithswe.github.io/TheStitchMarkerAssistant/)
 
 ## Purpose
 
 I came up with this idea while surfing around for a good knitting/ crochet app on my
-phone that would cover all my needs. Patterns, row counters with the actual row on
-display, logbook, instructional videos ect. Being one of the easily distracted crowd, I
+phone that would cover all my needs. Patterns, row counters with only the row I'm currently at on
+display, rather than the entire pattern. Being one of the easily distracted crowd, I
 wished for an app that doesn’t just let me keep track of where I am, but what that row
 entails without having the read half the pattern for the -umft time. When I couldn’t find
 exactly what I needed, I figured I could build it myself during my degree project.
 
-## Goal
+## Tech stack:
 
-#### Expected outcome in 6 weeks:
+- HTML 5
+- CSS 3 + Sass
+- React TypeScript + Vite
+- Supabase (database)
 
-Create a login page, personalized storage via LocalStorage(LS) and a database(DB),
-develop a row counter with instructions (connected to individual logins and patterns),
-create an online database for storing pattern information, page with instructional
-videos, editing of existing patterns. An overall cozy, and bright feel to the styling.
-Testing of application, e.g. connection to DB. Make it easy to use on both phone and
-webpage.
+## Author
 
-#### Bonus tasks if time allows:
+Amanda Hansson - [LilithSWE](https://github.com/LilithSWE)
 
-- Tutorial via pop-up
-- Multiple fonts and adjustable fonts to help dyslectic users as well as add
-  personalization.
-- Color picker/ chooser for the row-counter for a personalized feeling.
-- Multiple versions of the same pattern for different sizes.
-- Shopping list connected to pattern.
-- Logbook for keeping personal notes on project.
+## Lessons Learned
 
-#### Potential future additions, outside the scope of this project:
+- Setting up a registration with my custom SMTP server
+- Planning, designing and building a project from scratch om my own.
+- Optimization of styling to minimize the amount of css needed.
+- Figuring out what logic I'd like to use for the user experience to work as seemlessly as possible.
+- Testing on "real clients" (volonteers) and recieving great feedback from both hobbyists and none hobbyists which lead to an improved application.
+- Derivating from the original plan to focus more on adressing the feedback from the testers rather than implementing extra features works out better in the end.
 
-- Make patterns shareable/ sellable in the “correct format”.
-- Connect to API from Ravelry (major pattern website) for easier access to patterns.
-- Look into the possibility of a “self-structuring” rewrite of patterns. That is, take a
-  normal pattern and have the computer re-write it into the correct format. It is likely
-  nearly impossible as ppl write patterns very differently from one another.
+## Personal Thoughts From The Programmer
+
+I'm rather pleased with what I managed to build in 5,5 weeks. I have spent most of my time creating the database in a way that would work with my planned logic. A bit of trial and error, and 3 itterations of the database later, I managed to create a relatively easy to use system that let's the user enter patterns and connect them to the rowcounter.
+
+Some features I would have liked to add before time ran away from me would be:
+
+- Toggle to repeat part in rowcounter.
+- Button to display notes on part in rowcounter.
+- Ability to upload img connected to your patterns in patternform.
+
+But in the end I decided to focus on the feedback I got back from my testers and adressed things such as loading animations and features like "reset my password" instead. Which I feel gave more to the webpage in the end n terms of user friendliness. I will likely add the abovementioned features in the future though if I continue to use the webpage myself.
+
+## Screenshots
+
+### Mobile
+
+<img src="mobile home.png" alt="Mobile Home" width="300">
+<img src="mobile pattern.png" alt="Mobile Pattern" width="300">
+<img src="mobile rowcounter.png" alt="Mobile Rowcounter" width="300">
+<img src="mobile pattern 2.png" alt="Mobile Pattern Landscape" width="600">
+<img src="mobile rowcounter 2.png" alt="Mobile Rowcounter Landscape" width="600">
+
+### Tablet
+
+<img src="tablet home.png" alt="Tablet Home" width="400">
+<img src="tablet rowcounter.png" alt="Tablet Rowcounter" width="400">
+<img src="tablet single pattern.png" alt="Tablet Single Pattern" width="400">
+<img src="tablet edit pattern.png" alt="Tablet Edit Pattern" width="400">
+
+### Desktop
+
+<img src="desktop home.png" alt="Desktop Home" width="700">
+<img src="desktop patterns.png" alt="Desktop Patterns" width="700">
+<img src="desktop settings.png" alt="Desktop Settings" width="700">
+<img src="desktop login.png" alt="Desktop Login" width="700">

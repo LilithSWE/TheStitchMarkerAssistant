@@ -502,6 +502,7 @@ article {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
+
   p {
     font-size: 1.1rem;
   }
@@ -550,11 +551,12 @@ article {
     gap: 1rem;
     .rowCounterHeadline {
       display: block;
+      margin-bottom: 0.8rem;
     }
   }
 
   .rowContent {
-    height: 10rem;
+    height: 8rem;
   }
 
   .counterContainer {

@@ -86,6 +86,10 @@ section.patternFormContainer {
 }
 
 @media (orientation: landscape) {
+  section.firstView {
+    margin-top: 2rem;
+  }
+
   section.secondView {
     h2 {
       font-weight: 400;
